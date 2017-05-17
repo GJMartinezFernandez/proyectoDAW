@@ -10,6 +10,7 @@
     <script src="./bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="./JS/movimientoRuleta.js"></script>
     <script type="text/javascript" src="./JS/cronometro.js"></script>
+    <script type="text/javascript" src="./JS/apuestas.js"></script>
     <link rel="stylesheet" type="text/css" href="CSS/index.css">
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 </head>
@@ -57,22 +58,21 @@
         </div>
       </div>
       <div class="hero-unit balance">
-        <p> Apuesta:  <input type="number" value='0' id="dineroApuesta" class="inputApuesta"><button id="limpiar">Limpiar</button></p>
-       
-        <p> balance: <span>1000</span></p>
+        <p> Apuesta:  <input type="number" value='0' id="dineroApuesta" class="inputApuesta"><button id="limpiar">Limpiar</button></p>      
+        <p> balance: <span id="balance">1000</span></p>
       </div>
       <!-- Example row of columns -->
       <div class="row">
         <div class="span4">
-          <button type="button" class="btn btn-primary btn-lg btn-block btnRojo"> 1 HASTA 7 GANA X2</button>
+          <button type="button" class="btn btn-primary btn-lg btn-block btnRojo" id="btnRojo"> 1 HASTA 7 GANA X2</button>
           <p>SPANS DE APOSTADORES </p>
         </div>
         <div class="span4">
-         <button type="button" class="btn btn-primary btn-lg btn-block btnVerde"> 0, GANA X14</button>
+         <button type="button" class="btn btn-primary btn-lg btn-block btnVerde" id="btnVerde"> 0, GANA X14</button>
           <p>SPANS DE APOSTADORES </p>
        </div>
         <div class="span4">
-          <button type="button" class="btn btn-primary btn-lg btn-block btnNegro"> 8 HASTA 14 GANA X2</button>
+          <button type="button" class="btn btn-primary btn-lg btn-block btnNegro" id="btnNegro"> 8 HASTA 14 GANA X2</button>
           <p> SPANS DE APOSTADORES</p>
         </div>
       </div>

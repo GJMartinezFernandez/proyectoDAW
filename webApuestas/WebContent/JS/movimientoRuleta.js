@@ -46,6 +46,6 @@ var posIni = 0;
     }
     
     function  ganar(){
-    	cronometro = 20;
     	pedirCronometro();
+		activarBotones();
     }

@@ -15,7 +15,7 @@ import javax.ws.rs.Path;
 
 @Path("/server")
 public class servidor extends HttpServlet{
-
+	
 	int numero=20;
 	ScheduledExecutorService timer;
 	
@@ -26,6 +26,15 @@ public class servidor extends HttpServlet{
 	}
 	
 	
+	
+	@GET
+	@Path("/apostar")
+	public int apostar(HttpServletRequest request){
+		//TODO Actualizar BD con la apuesta e introducir jugador dentro de una lista
+		int respuesta = 1;
+		
+		return respuesta;
+	}
 	
 	@Override
 	    public void init(ServletConfig config) throws ServletException{
@@ -60,7 +69,4 @@ public class servidor extends HttpServlet{
 	};
 	
 	
-	public void holaGonzalo(){
-		
-	}
 }

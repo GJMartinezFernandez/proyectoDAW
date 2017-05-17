@@ -30,6 +30,7 @@
 			}else{
 				pedirNumero();
 				clearInterval(idInterval);
+				bloquearBotones();
 			}
 		},1000);
 	}
