@@ -58,5 +58,9 @@ public class servidor extends HttpServlet{
 	    actualizarNumero();
 	  }
 	};
-
+	
+	
+	public void holaGonzalo(){
+		
+	}
 }
