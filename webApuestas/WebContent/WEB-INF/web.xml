@@ -11,6 +11,7 @@
    
     <load-on-startup>1</load-on-startup>
   </servlet>
+  
   <servlet-mapping>
     <servlet-name>Jersey REST Service</servlet-name>
     <url-pattern>/services/*</url-pattern>
@@ -19,4 +20,8 @@
    <welcome-file-list>
  	<welcome-file>webApuestas.html</welcome-file>
  </welcome-file-list>
+ 
+ <listener>
+        <listener-class>webApuestas.StartupListener</listener-class>
+    </listener>
 </web-app>
