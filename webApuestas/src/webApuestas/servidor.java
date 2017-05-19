@@ -3,35 +3,18 @@ package webApuestas;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
+import java.util.ArrayList;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import javax.inject.Singleton;
-import javax.jws.WebService;
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebListener;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.websocket.server.PathParam;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
 
-import com.mysql.jdbc.PreparedStatement;
-import com.sun.corba.se.pept.transport.Connection;
+import com.google.gson.Gson;
+import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.Statement;
+
+
 
 @Path("/server")
 public class servidor extends HttpServlet{
@@ -61,7 +44,26 @@ public class servidor extends HttpServlet{
 	@Path("/getpresents")
 	public String getPresents(){
 		
-		return "{'name':'hola','stock':23,'price':100,'image':'hola.jgp'}";
+		Gson gson = new Gson();
+		Premio premio = null;
+		ArrayList<Premio> premios = new ArrayList<Premio>();
+		String salida;
+		try {
+			Connection conexion = getConnection();
+			Statement s = (Statement) conexion.createStatement(); 
+			ResultSet rs = s.executeQuery ("select * from premios");
+			while (rs.next()) 
+			{ 
+			    premio = new Premio(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getInt(4),rs.getString(5));
+			    premios.add(premio);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		salida = gson.toJson(premios);
+		return salida;
 	}
 	
 	public static void actualizarNumero(){
@@ -78,10 +80,26 @@ public class servidor extends HttpServlet{
 		numero=20;
 	}
 	
-	public Connection getConnection(){
-
+	public Connection getConnection() throws SQLException{
+		Connection con = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			
+			
+			String sURL = "jdbc:mysql://localhost:3306/web_apuestas";
+			con = (Connection) DriverManager.getConnection(sURL,"root","");
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		return null;
+		return con;
 	}
 	
 	
