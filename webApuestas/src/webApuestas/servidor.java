@@ -20,7 +20,7 @@ import com.mysql.jdbc.Statement;
 @Path("/server")
 public class servidor extends HttpServlet{
 	
-	static ArrayList<Jugador> apuestas = new ArrayList<Jugador>();
+	static ArrayList<Apuesta> apuestas = new ArrayList<Apuesta>();
 	static  final int MAX_TIME = 20;
 	static int numero=MAX_TIME;
 	static int numeroGanador;
@@ -37,7 +37,7 @@ public class servidor extends HttpServlet{
 		//TODO Actualizar BD con la apuesta e introducir jugador dentro de una lista
 		int respuesta = 1;
 		Gson gson = new Gson();
-		Jugador jugador = gson.fromJson(json, Jugador.class);
+		Apuesta jugador = gson.fromJson(json, Apuesta.class);
 		
 		try {
 			Connection conexion = getConnection();
@@ -114,7 +114,7 @@ public class servidor extends HttpServlet{
 		}
 
 		for(int i=0;i<apuestas.size();i++){
-			Jugador jugador = apuestas.get(i);
+			Apuesta jugador = apuestas.get(i);
 			if(jugador.getColor().equals(colorGanador)){
 				//TODO Falta enviar a cada ganador el mensaje de que ha ganado.
 				try {
@@ -127,6 +127,7 @@ public class servidor extends HttpServlet{
 				}
 			}
 		}
+		apuestas.clear();
 		numero=MAX_TIME;
 	}
 	

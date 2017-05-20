@@ -1,6 +1,5 @@
-     function Jugador(id,nombre,cantidad){
+     function Apuesta(id,nombre,cantidad){
         this.id = id;
-        this.nombre = nombre;
         this.cantidad = cantidad;
         this.color;
     }
@@ -21,7 +20,7 @@ $(document).ready(function(){
 		var span = $('<span></span><br>');
 		var cantidad = $('#dineroApuesta').val();
 		var balance = parseInt($('#balance').text());
-		var jug = new Jugador(1,"nombre",cantidad,"rojo");
+		var jug = new Apuesta(1,cantidad,"rojo");
         var json = JSON.stringify(jug);
         console.log(json);
 		//TODO Falta recuperar nombre del jugador y bloquear botones

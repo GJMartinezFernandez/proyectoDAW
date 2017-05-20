@@ -1,16 +1,14 @@
 package webApuestas;
 
-public class Jugador {
+public class Apuesta {
 
 	 private int id;
-     private String nombre;
      private int cantidad;
      private String color;
      
      
-     public Jugador(int id, String nombre, int cantidad, String color){
+     public Apuesta(int id, int cantidad, String color){
     	 this.id = id;
-    	 this.nombre = nombre;
     	 this.cantidad = cantidad;
     	 this.color = color;
      }
@@ -19,9 +17,6 @@ public class Jugador {
     	 this.id = id;
      }
      
-     public void setNombre(String nombre){
-    	 this.nombre = nombre;
-     }
      
      public void setCantidad(int cantidad){
     	 this.cantidad = cantidad;
@@ -33,10 +28,6 @@ public class Jugador {
      
      public int getId(){
     	 return this.id;
-     }
-     
-     public String getNombre(){
-    	 return this.nombre;
      }
      
      public int getCantidad(){
