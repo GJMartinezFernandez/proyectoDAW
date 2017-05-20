@@ -5,10 +5,18 @@ var casilla = tamano/30;
 var posIni = 0;
 
     function pedirNumero(){
-    	numero= Math.floor(Math.random() * (14 - 0)) + 0;
-        console.log(numero);
-    	mover(numero);
-        numeroAnt = numero;
+    	$.ajax({
+            url:   'services/server/numeroGanador',
+            type:  'get',
+            success:  function (response) {
+                        	mover(response);
+                            numeroAnt = response;
+            },
+            error: function (){
+                        console.log("error")
+                    }
+    });
+
     }
 
     function mover(numero){

@@ -2,11 +2,11 @@ package webApuestas;
 
 public class Premio {
 
-	int id;
-	String name;
-	int price;
-	int stock;
-	String image;
+	private int id;
+	private String name;
+	private int price;
+	private int stock;
+	private String image;
 	
 	public Premio(int id, String name, int price, int stock, String image){
 		this.id = id;
