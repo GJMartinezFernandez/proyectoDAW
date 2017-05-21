@@ -3,13 +3,13 @@ package webApuestas;
 public class Apuesta {
 
 	 private int id;
-     private int cantidad;
+     private int coins;
      private String color;
      
      
-     public Apuesta(int id, int cantidad, String color){
+     public Apuesta(int id, int coins, String color){
     	 this.id = id;
-    	 this.cantidad = cantidad;
+    	 this.coins = coins;
     	 this.color = color;
      }
      
@@ -18,8 +18,8 @@ public class Apuesta {
      }
      
      
-     public void setCantidad(int cantidad){
-    	 this.cantidad = cantidad;
+     public void setCoins(int coins){
+    	 this.coins = coins;
      }
      
      public void setColor(String color){
@@ -30,12 +30,12 @@ public class Apuesta {
     	 return this.id;
      }
      
-     public int getCantidad(){
-    	 return this.cantidad;
+     public int getCoins(){
+    	 return this.coins;
      }
      
      public String getColor(){
-    	 return this.color;
+    	 return this.color.toString();
      }
      
 }

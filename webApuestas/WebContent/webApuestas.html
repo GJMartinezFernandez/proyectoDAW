@@ -17,6 +17,9 @@
 </head>
 <body>
 
+    <input type="hidden" id="nombre" value="">
+    <input type="hidden" id="id" value="">
+
 <div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
@@ -38,13 +41,15 @@
               <button type="submit" class="btn">Sign in</button>
             </form> -->
 					<button id="myBtn" type="submit" class="btn">Sign in</button>
+          <!--span para el nombre del usuario-->
+          <span id="usuario"></span>
 				</div>
 				<!--/.nav-collapse -->
 			</div>
 		</div>
 	</div>
 
-    
+
     	<div id="myModal" class="modalPrueba">
 
 		<!-- Modal content -->
@@ -66,11 +71,12 @@
 							<div class="tab-content">
 								<div id="sectionA" class="tab-pane fade in active">
 									<div class="innter-form">
-										<form class="sa-innate-form" method="post">
-											<label>Email Address</label> <input type="text"
-												name="username"> <label>Password</label> <input
-												type="password" name="password">
-											<button type="submit">Sign In</button>
+										<form class="sa-innate-form" id="formLogin" action="" method="post">
+											<label>Email</label>
+                       <input type="text"name="email">
+                        <label>Contraseña</label>
+                        <input type="password" name="password">
+											<button type="submit" id="submitLogin">Sign In</button>
 										</form>
 									</div>
 
@@ -78,14 +84,13 @@
 								</div>
 								<div id="sectionB" class="tab-pane fade">
 									<div class="innter-form">
-										<form class="sa-innate-form" method="post">
-											<label>Name</label> <input type="text" name="username">
-											<label>Email Address</label> <input type="text"
-												name="username"> <label>Password</label> <input
+										<form class="sa-innate-form" id="formRegister"method="post">
+                    <label>Nombre</label>
+                    <input type="text"name="username">
+											<label>Email</label>
+                      <input type="text"	name="email"> <label>Contraseña</label> <input
 												type="password" name="password">
-											<button type="submit">Join now</button>
-											<p>By clicking Join now, you agree to hifriends's User
-												Agreement, Privacy Policy, and Cookie Policy.</p>
+											<button type="submit" id="submitRegister">Join now</button>
 										</form>
 									</div>
 
@@ -106,15 +111,15 @@
       <div class="hero-unit">
         <div class="ruleta-wrap">
           <div class="ruleta">
-            
+
           </div>
           <div class="indicador">
-            
+
           </div>
         </div>
       </div>
       <div class="hero-unit balance">
-        <p> Apuesta:  <input type="number" value='0' id="dineroApuesta" class="inputApuesta"><button id="limpiar">Limpiar</button></p>      
+        <p> Apuesta:  <input type="number" value='0' id="dineroApuesta" class="inputApuesta"><button id="limpiar">Limpiar</button></p>
         <p> balance: <span id="balance">1000</span></p>
         <p  id="apuesta"></p>
       </div>
@@ -140,7 +145,7 @@
         <p></p>
       </footer>
 
-    </div> 
+    </div>
 
 </body>
 </html>

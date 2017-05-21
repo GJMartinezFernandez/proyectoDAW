@@ -1,7 +1,8 @@
-     function Apuesta(id,nombre,cantidad){
+var listaApuestas = [];
+function Apuesta(id,coins,color){
         this.id = id;
-        this.cantidad = cantidad;
-        this.color;
+        this.coins = coins;
+        this.color = color;
     }
 
 $(document).ready(function(){
@@ -18,13 +19,15 @@ $(document).ready(function(){
 		var boton = $(this);
 		var p = boton.next();
 		var span = $('<span></span><br>');
-		var cantidad = $('#dineroApuesta').val();
+		var coins = $('#dineroApuesta').val();
 		var balance = parseInt($('#balance').text());
-		var jug = new Apuesta(1,cantidad,"rojo");
+		var jug = new Apuesta(1,coins,colorApostado($(this).attr("id")));
+        listaApuestas[listaApuestas.length] = jug;
+        console.log(listaApuestas);
         var json = JSON.stringify(jug);
         console.log(json);
 		//TODO Falta recuperar nombre del jugador y bloquear botones
-		if(cantidad <= balance && cantidad>0){
+		if(coins <= balance && coins>0){
 			$.ajax({
 	            url:   'services/server/apostar/' + json,
 	            type:  'get',
@@ -41,7 +44,7 @@ $(document).ready(function(){
 	                        console.log("error")
 	                    }
 	    });
-			span.text(cantidad);
+			span.text(coins);
 			p.append(span);
 		}
 	}
@@ -70,14 +73,15 @@ $(document).ready(function(){
 		var txtBalance = parseInt(balance.text());
 		var nuevoBalance = "";
 		var ganadores = JSON.parse(json);
+        console.log(ganadores);
 			//apuestas ganadass
 			if(bool){
 				$(apuesta).css("right","50px");
 				$(apuesta).css("opacity","1")
 				$(apuesta).css("color","green");
 				//esta sera la cantidad que hemos ganado cuando el server la calcule y nos la devuelva
-				apuesta.text("+" + parseInt(ganadores.cantidad));
-				nuevoBalance = txtBalance + parseInt(ganadores.cantidad);
+				apuesta.text("+" + parseInt(ganadores.coins));
+				nuevoBalance = txtBalance + parseInt(ganadores.coins);
 				$(balance).fadeTo(350,0, function() {
 					$(this).text(nuevoBalance).fadeTo(350,1);
 				});
@@ -93,8 +97,8 @@ $(document).ready(function(){
 			$(apuesta).css("opacity","1")
 			$(apuesta).css("color","red");
 			//esta sera la cantidad que perdemos de lo apostado se obtiene del objeto antes de enviarlo
-			apuesta.text("-" + parseInt(ganadores.cantidad));
-			nuevoBalance = txtBalance - parseInt(ganadores.cantidad);
+			apuesta.text("-" + parseInt(ganadores.coins));
+			nuevoBalance = txtBalance - parseInt(ganadores.coins);
 			$(balance).fadeTo(350,0, function() {
 				$(this).text(nuevoBalance).fadeTo(350,1);
 			});
@@ -107,6 +111,17 @@ $(document).ready(function(){
 }
 }
 
-
+function colorApostado(id){
+    var color;
+    switch(id){
+        case "btnRojo": color ="rojo";
+                        break;
+        case "btnVerde": color = "verde";
+                        break;
+        case "btnNegro": color = "negro";
+                        break;
+    }
+    return color;
+}
 
  

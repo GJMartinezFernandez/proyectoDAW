@@ -3,12 +3,25 @@ var tamano = 2348;
 var vueltas = 2;
 var casilla = tamano/30;
 var posIni = 0;
-
+var ganador = false;
+var colorGanador;
+var apuestaGanadora;
+var multiplicador;
     function pedirNumero(){
     	$.ajax({
             url:   'services/server/numeroGanador',
             type:  'get',
             success:  function (response) {
+                            if(response==0){
+                                colorGanador = "verde";
+                                multiplicador = 14;
+                            }else if(response<=7){
+                                colorGanador = "rojo";
+                                multiplicador = 2;
+                            }else{
+                                colorGanador = "negro";
+                                multiplicador = 2;
+                            }
                         	mover(response);
                             numeroAnt = response;
             },
@@ -26,10 +39,10 @@ var posIni = 0;
     	var movimiento =  (tamano*vueltas)+numeroCasillas-centro-casillaPos;
     	$('.ruleta').animate({
   		  'background-position-x': '-='+ movimiento +'px'
-  		}, 2000, 'swing',ganar);
+  		}, 2000, 'swing', ganar);
         var cadena = $('.ruleta').css("background-position-x");
     	posIni = movimiento;
-        setTimeout(reset,3000);
+        
         //console.log(posIni);
     	}
 
@@ -54,6 +67,26 @@ var posIni = 0;
     }
     
     function  ganar(){
+        console.log("ganar");
+        console.log(listaApuestas);
+        
+        for(var i=0;i<listaApuestas.length;i++){
+            if(listaApuestas[i].color == colorGanador){
+                apuestaGanadora = listaApuestas[i];
+                apuestaGanadora.coins*=multiplicador;
+                ganador = true;
+                break;
+            }
+        }
+        
+        if(ganador){
+            var json = JSON.stringify(apuestaGanadora);
+            console.log(json)
+            pintar(json,true);
+        }
+        
     	pedirCronometro();
 		activarBotones();
+        ganar = false;
+        setTimeout(reset,3000);
     }

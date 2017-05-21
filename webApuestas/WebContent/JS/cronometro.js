@@ -28,6 +28,7 @@
 				cronometro-=1;
 				txtnumero.text('' + cronometro);
 			}else{
+                
 				pedirNumero();
 				clearInterval(idInterval);
 				bloquearBotones();
