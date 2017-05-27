@@ -36,6 +36,7 @@ public class servidor extends HttpServlet{
 	@GET
 	@Path("/cronometro")
 	public int getNumero(){
+		System.out.println("numero pedido");
 		return numero;
 	}
 	
@@ -127,7 +128,7 @@ public class servidor extends HttpServlet{
 	@Path("/register/{json}")
 	public String register( @PathParam("json") String json){
 		
-		
+		System.out.println(json);
 		Gson gson = new Gson();
 		Jugador jugador = gson.fromJson(json, Jugador.class);
 		Jugador j1 = null;

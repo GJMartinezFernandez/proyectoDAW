@@ -22,12 +22,12 @@ $(document).ready(function(){
 		var coins = $('#dineroApuesta').val();
 		var balance = parseInt($('#balance').text());
 		var jug = new Apuesta(1,coins,colorApostado($(this).attr("id")));
-        listaApuestas[listaApuestas.length] = jug;
         console.log(listaApuestas);
         var json = JSON.stringify(jug);
-        console.log(json);
+
 		//TODO Falta recuperar nombre del jugador y bloquear botones
 		if(coins <= balance && coins>0){
+            listaApuestas[listaApuestas.length] = jug;
 			$.ajax({
 	            url:   'services/server/apostar/' + json,
 	            type:  'get',

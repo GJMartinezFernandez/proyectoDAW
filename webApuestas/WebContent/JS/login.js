@@ -7,7 +7,8 @@ $(document).ready(function(){
     var balance = $('#balance');
 //logearse
 $('#submitLogin').click(function(){
-   var data = JSON.stringify( $('#formLogin').serializeArray());
+   var data = JSON.stringify( $('#formLogin').serialize());
+    console.log(data);
   $.ajax({
     type: 'get',
     dataType: "json",
@@ -31,7 +32,8 @@ $('#submitLogin').click(function(){
 });
 //Registrarse
 $('#submitRegister').click(function(){
-   var data = JSON.stringify( $('#formRegister').serializeArray());
+   var data = JSON.stringify( $('#formRegister').serialize());
+    
   $.ajax({
     type: 'get',
     dataType: "json",
@@ -49,6 +51,7 @@ $('#submitRegister').click(function(){
       },
       error: function (){
                     console.log("error")
+                    console.log(data);
       }
   });
 });

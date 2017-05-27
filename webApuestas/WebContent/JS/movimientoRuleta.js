@@ -7,6 +7,9 @@ var ganador = false;
 var colorGanador;
 var apuestaGanadora;
 var multiplicador;
+var tiempoMoverRuleta = 2000;
+var tiempoResetRuleta = 1000;
+var tiempEsperaReset = 3000;
     function pedirNumero(){
     	$.ajax({
             url:   'services/server/numeroGanador',
@@ -23,7 +26,6 @@ var multiplicador;
                                 multiplicador = 2;
                             }
                         	mover(response);
-                            numeroAnt = response;
             },
             error: function (){
                         console.log("error")
@@ -39,10 +41,7 @@ var multiplicador;
     	var movimiento =  (tamano*vueltas)+numeroCasillas-centro-casillaPos;
     	$('.ruleta').animate({
   		  'background-position-x': '-='+ movimiento +'px'
-  		}, 2000, 'swing', ganar);
-        var cadena = $('.ruleta').css("background-position-x");
-    	posIni = movimiento;
-        
+  		}, tiempoMoverRuleta, 'swing',ganar);
         //console.log(posIni);
     	}
 
@@ -63,7 +62,7 @@ var multiplicador;
     function reset(){
         $('.ruleta').animate({
   		  'background-position-x': '+='+ posIni +'px'
-  		}, 1000, 'swing');
+  		}, tiempoResetRuleta, 'swing');
     }
     
     function  ganar(){
@@ -85,8 +84,9 @@ var multiplicador;
             pintar(json,true);
         }
         
+        listaApuestas = [];
     	pedirCronometro();
 		activarBotones();
-        ganar = false;
-        setTimeout(reset,3000);
+        ganador = false;
+        setTimeout(reset,tiempEsperaReset);
     }

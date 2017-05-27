@@ -14,6 +14,8 @@ public class StartupListener implements ServletContextListener {
 	static ScheduledExecutorService timer;
     @Override
     public void contextInitialized(ServletContextEvent event) {
+    	 Thread thread = new Thread(tarea);
+    	 thread.setDaemon(true);
     	 timer = Executors.newSingleThreadScheduledExecutor();
 		 timer.scheduleAtFixedRate(tarea, 1, 1, TimeUnit.SECONDS);
 		 System.out.println("funciono");
