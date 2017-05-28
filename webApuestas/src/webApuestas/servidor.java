@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
 import java.util.Random;
 
@@ -105,8 +106,8 @@ public class servidor extends HttpServlet{
 		Gson gson = new Gson();	
 		Premio premio = null;
 		ArrayList<Premio> premios = new ArrayList<Premio>();
-		Type listType = new TypeToken<ArrayList<String>>() {}.getType();
-		ArrayList<String> ids = new Gson().fromJson(json, listType);
+		TypeToken<List<String>> token = new TypeToken<List<String>>() {};
+		List<String> ids = new Gson().fromJson(json, token.getType());
 		String condicion="";
 		if(ids.size()>0){
 			condicion = ids.get(0);
@@ -129,6 +130,7 @@ public class servidor extends HttpServlet{
 			e.printStackTrace();
 		}
 		
+		salida = gson.toJson(premios);
 		return salida;
 	}
 	

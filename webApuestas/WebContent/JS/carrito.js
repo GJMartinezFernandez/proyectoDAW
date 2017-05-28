@@ -2,12 +2,12 @@ $(document).ready(function () {
     console.log("Cookie: "+getCookie("carrito"))
     var arrayIds = getCookie("carrito").split(',')
     console.log("Array split:" + arrayIds)
-    var json = {
-        
-    }
+    var json = [];
+    
     for (i in arrayIds) {
         json[i] = arrayIds[i]
     }
+    
     console.log(json)
     var jsonString = JSON.stringify(json)
     console.log("JSON Stringify: "+ JSON.stringify(json))
@@ -15,7 +15,7 @@ $(document).ready(function () {
         type: 'GET'
         , url: 'services/server/getcarrito/' + jsonString
         , success: function (data) {
-            var json = JSON.parse(data)
+            var json = "[" + JSON.parse(data) + "]";
             console.log(data)
                 /*for (i in json) {
                     var id = json[i].id
