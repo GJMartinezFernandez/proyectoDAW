@@ -18,7 +18,7 @@ function openSocket(){
         return;
     }
             
-     webSocket = new WebSocket("ws://localhost:8090/webApuestas/EchoServer");
+     webSocket = new WebSocket("ws://192.168.1.20:8090/webApuestas/EchoServer");
                  
 
      webSocket.onopen = function(event){

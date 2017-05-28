@@ -13,7 +13,7 @@ import javax.websocket.server.ServerEndpoint;
 @ServerEndpoint("/EchoServer") 
 public class EchoServer {
 
-	ArrayList<Session> sesiones = new ArrayList<Session>();
+	static ArrayList<Session> sesiones = new ArrayList<Session>();
     @OnOpen
     public void onOpen(Session session){
         System.out.println(session.getId() + " has opened a connection"); 
@@ -26,7 +26,8 @@ public class EchoServer {
         System.out.println("Message from " + session.getId() + ": " + message);
         try {
         	for(int i=0;i<sesiones.size();i++){
-        		session.getBasicRemote().sendText(message);
+        		sesiones.get(i).getBasicRemote().sendText(message);
+        		System.out.println(sesiones.get(i).getBasicRemote());
         	}
             
             
