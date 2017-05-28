@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Properties;
 import java.util.Random;
 
 import javax.servlet.http.HttpServlet;
@@ -32,11 +34,12 @@ public class servidor extends HttpServlet{
 	static  final int MAX_TIME = 20;
 	static int numero=MAX_TIME;
 	static int numeroGanador;
+	final int COINS_INICIO = 4000;
 	
 	@GET
 	@Path("/cronometro")
 	public int getNumero(){
-		System.out.println("numero pedido");
+
 		return numero;
 	}
 	
@@ -44,7 +47,7 @@ public class servidor extends HttpServlet{
 	@Path("/apostar/{json}")
 	public int apostar(HttpServletRequest request , @PathParam("json") String json){
 		//TODO Actualizar BD con la apuesta e introducir jugador dentro de una lista
-		System.out.println(json);
+
 		int respuesta = 1;
 		Gson gson = new Gson();
 		Type type = new TypeToken<Apuesta>(){}.getType();
@@ -94,11 +97,47 @@ public class servidor extends HttpServlet{
 		return salida;
 	}
 	
+	@GET
+	@Path("/getcarrito/{json}")
+	public String getCarrito( @PathParam("json") String json){
+		String salida = "";
+		Gson gson = new Gson();	
+		Premio premio = null;
+		ArrayList<Premio> premios = new ArrayList<Premio>();
+		Type listType = new TypeToken<ArrayList<String>>() {}.getType();
+		ArrayList<String> ids = new Gson().fromJson(json, listType);
+		String condicion="";
+		if(ids.size()>0){
+			condicion = ids.get(0);
+			for(int i = 1;i<ids.size();i++){
+				condicion+=","+ids.get(i);
+			}
+		}
+		
+		try {
+			Connection conexion = getConnection();
+			Statement s = (Statement) conexion.createStatement(); 
+			ResultSet rs = s.executeQuery ("select * from premios WHERE id IN (" + condicion + ");");
+			while (rs.next()) 
+			{ 
+			    premio = new Premio(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getInt(4),rs.getString(5));
+			    premios.add(premio);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return salida;
+	}
+	
 	@GET 
 	@Path("/login/{json}")
 	public String login( @PathParam("json") String json){
+		System.out.println("Dentro");
 		Gson gson = new Gson();
-		Jugador jugador = gson.fromJson(json, Jugador.class);
+		Properties properties = gson.fromJson(json, Properties.class);
+		Jugador jugador =  new Jugador(null,properties.getProperty("email"),properties.getProperty("password"));
 		String result="";
 		Jugador j1 = null;
 		try {
@@ -112,6 +151,7 @@ public class servidor extends HttpServlet{
 			else{
 			    do{
 			    	//devuelve el id, nombre y coins 
+			    	System.out.println("Creando jugador");
 			    	 j1= new Jugador(rs.getInt(1),rs.getString(2),rs.getInt(5));
 			    } 
 			    while(rs.next());
@@ -128,36 +168,37 @@ public class servidor extends HttpServlet{
 	@Path("/register/{json}")
 	public String register( @PathParam("json") String json){
 		
-		System.out.println(json);
+
 		Gson gson = new Gson();
-		Jugador jugador = gson.fromJson(json, Jugador.class);
-		Jugador j1 = null;
+		Properties properties = gson.fromJson(json, Properties.class);
+		Jugador jugador =  new Jugador(properties.getProperty("username"),properties.getProperty("email"),properties.getProperty("password"));
 		String result="";
 		
 		try {
 			Connection conexion = getConnection();
 			Statement s = (Statement) conexion.createStatement(); 
-			ResultSet rs = s.executeQuery ("INSERT INTO usuarios(id, user, email, pass, coins) VALUES ('"+jugador.id+"','"+jugador.name+"','"+jugador.email+"', '"+jugador.pass+"','"+jugador.coins+"')");
+			ResultSet rs = s.executeQuery("select * from usuarios where email='"+jugador.email+"'");
+			
 			if(!rs.next()){ 
-			    System.out.println("no hay filas");  
-			    //devolver algo al front para saber que algo fue mal.
+				int id = conseguirUltimaId()+1;
+			    s.executeUpdate("INSERT INTO usuarios(id, user, email, pass, coins) VALUES ('"+id+"','"+jugador.name+"','"+jugador.email+"', '"+jugador.pass+"','"+COINS_INICIO+"')");
+			    jugador.setCoins(COINS_INICIO);
+			    jugador.setId(id);    
 			}
 			else{
-			    do{
-			    	//devuelve el id, nombre y coins 
-			    	 j1= new Jugador(rs.getInt(1),rs.getString(2),rs.getInt(5));
-			    } 
-			    while(rs.next());
+			    System.out.println("El usuario ya existe");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		result = gson.toJson(j1);
+		
+		result = gson.toJson(jugador);
 		return result;
 	}
 	
 	public static void actualizarBD(){
+		
 		String colorGanador="";
 		int multiplicador = 2;
 		
@@ -178,17 +219,17 @@ public class servidor extends HttpServlet{
 		for(int i=0;i<apuestas.size();i++){
 			Apuesta jugador = apuestas.get(i);
 			if(jugador.getColor().equals(colorGanador)){
-				//TODO Falta enviar a cada ganador el mensaje de que ha ganado.
+
 				try {
 					Connection conexion = getConnection();
 					Statement s = (Statement) conexion.createStatement(); 
 					s.executeUpdate("UPDATE usuarios set coins = coins + " + jugador.getCoins()*multiplicador + " WHERE id = " + jugador.getId());
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
+				} catch (SQLException e) {	
 					e.printStackTrace();
 				}
 			}
 		}
+		
 		apuestas.clear();
 		numero=MAX_TIME;
 	}
@@ -223,4 +264,22 @@ public class servidor extends HttpServlet{
 		}
 	}
 	
+	public int  conseguirUltimaId(){
+		int id = 1;
+		try {
+			Connection conexion = getConnection();
+			Statement s = (Statement) conexion.createStatement(); 
+			ResultSet rs = s.executeQuery("SELECT id FROM usuarios ORDER BY 1 DESC ");
+			
+			if(rs.next()){ 
+				id = rs.getInt("id");
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return id;
+	}
 }

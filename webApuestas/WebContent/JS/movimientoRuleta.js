@@ -42,7 +42,7 @@ var tiempEsperaReset = 3000;
     	$('.ruleta').animate({
   		  'background-position-x': '-='+ movimiento +'px'
   		}, tiempoMoverRuleta, 'swing',ganar);
-        //console.log(posIni);
+
     	}
 
     function buscarPosicion(numero){
@@ -66,8 +66,6 @@ var tiempEsperaReset = 3000;
     }
     
     function  ganar(){
-        console.log("ganar");
-        console.log(listaApuestas);
         
         for(var i=0;i<listaApuestas.length;i++){
             if(listaApuestas[i].color == colorGanador){

@@ -6,53 +6,68 @@ $(document).ready(function(){
     var inputId = $('#id');
     var balance = $('#balance');
 //logearse
-$('#submitLogin').click(function(){
-   var data = JSON.stringify( $('#formLogin').serialize());
-    console.log(data);
-  $.ajax({
-    type: 'get',
-    dataType: "json",
-    url:   'services/server/login/' + data,
-    success:  function (response) {
-      //añadir un div con una ruleta girando para dar la sensacion de carga
-                    modal.css("display","none");
-                    btn.css("display","none");
-                    var respuesta = JSON.parse(response);
-                    balance.text(respuesta.cantidad);
-                    spanUsuario.text(respuesta.nombre);
-                    inputName.val(respuesta.nombre);
-                    inputName.val(respuesta.id);
-                    cosole.log("login correcto");
+    $('#submitLogin').click(function(){
 
-      },
-      error: function (){
-                    console.log("error")
-      }
-  });
-});
-//Registrarse
-$('#submitRegister').click(function(){
-   var data = JSON.stringify( $('#formRegister').serialize());
+        var object = $('#formLogin').serializeArray()
+            .reduce(function(a, x) { 
+                         a[x.name] = x.value; return a;
+                    }, {});
+        
+        var data = JSON.stringify(object);
+        console.log(data);
+
+      $.ajax({
+        type: 'get',
+        url:   'services/server/login/' + data,
+        success:  function (response) {
+          //añadir un div con una ruleta girando para dar la sensacion de carga
+                        console.log("Dentro antes de explotar");
+                        modal.css("display","none");
+                        btn.css("display","none");
+                        var respuesta = JSON.parse(response);
+                        balance.text(respuesta.cantidad);
+                        spanUsuario.text(respuesta.nombre);
+                        inputName.val(respuesta.nombre);
+                        inputName.val(respuesta.id);
+                        console.log("login correcto");
+
+          },
+          error: function(xhr, status, error,exc) {
+                    console.log(exc);
+                 }
+      });
+    });
     
-  $.ajax({
-    type: 'get',
-    dataType: "json",
-    url:   'services/server/register/' + data,
-    success:  function (response) {
-        //añadir un div con una ruleta girando para dar la sensacion de carga
-                    modal.css("display","none");
-                    btn.css("display","none");
-                    var respuesta = JSON.parse(response);
-                    spanUsuario.text(respuesta.nombre);
-                    inputName.val(respuesta.nombre);
-                    inputName.val(respuesta.id);
-                    cosole.log("login correcto");
+    //Registrarse
+    $('#submitRegister').click(function(){
 
-      },
-      error: function (){
-                    console.log("error")
-                    console.log(data);
-      }
-  });
-});
+           var object = $('#formRegister').serializeArray()
+            .reduce(function(a, x) {
+                        a[x.name] = x.value; return a; 
+                    }, {});
+        
+           var data = JSON.stringify(object);
+           console.log(data);
+
+      $.ajax({
+        type: 'get',
+        url:   'services/server/register/' + data,
+        success:  function (response) {
+            //añadir un div con una ruleta girando para dar la sensacion de carga
+                        console.log("Registros antes de explotar");
+                        modal.css("display","none");
+                        btn.css("display","none");
+                        var respuesta = JSON.parse(response);
+                        spanUsuario.text(respuesta.nombre);
+                        inputName.val(respuesta.nombre);
+                        inputName.val(respuesta.id);
+                        console.log("Registro correcto");
+
+          },
+          error: function(xhr, status, error,exc) {
+                     console.log(exc);
+                 }
+      });
+    });
+    
 });

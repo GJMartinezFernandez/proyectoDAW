@@ -7,6 +7,13 @@ public class Jugador {
 	String pass;
 	int coins;
 	
+	
+	public Jugador(String name, String email,String pass ){
+		this.name = name;
+		this.email = email;
+		this.pass=pass;
+	}
+	
 	public Jugador(int id, String name,String email,String pass,int coins){
 		this.id = id;
 		this.name = name;

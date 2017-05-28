@@ -22,7 +22,6 @@ $(document).ready(function(){
 		var coins = $('#dineroApuesta').val();
 		var balance = parseInt($('#balance').text());
 		var jug = new Apuesta(1,coins,colorApostado($(this).attr("id")));
-        console.log(listaApuestas);
         var json = JSON.stringify(jug);
 
 		//TODO Falta recuperar nombre del jugador y bloquear botones
@@ -33,9 +32,7 @@ $(document).ready(function(){
 	            type:  'get',
                 dataType: "json",
 	            success:  function (response) {
-	                    if(response==1){
-	                    	console.log('apostado con existo');
-                            
+	                    if(response==1){                        
 	                    	boton.prop("disabled", true);
 	                    	pintar(json,false);
 	                    }
@@ -73,7 +70,6 @@ $(document).ready(function(){
 		var txtBalance = parseInt(balance.text());
 		var nuevoBalance = "";
 		var ganadores = JSON.parse(json);
-        console.log(ganadores);
 			//apuestas ganadass
 			if(bool){
 				$(apuesta).css("right","50px");
