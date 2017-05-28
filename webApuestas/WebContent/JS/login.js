@@ -5,7 +5,7 @@ $(document).ready(function(){
     var inputName = $('#nombre');
     var inputId = $('#id');
     var balance = $('#balance');
-//logearse
+    //logearse
     $('#submitLogin').click(function(){
 
         var object = $('#formLogin').serializeArray()
@@ -22,10 +22,11 @@ $(document).ready(function(){
         success:  function (response) {
           //añadir un div con una ruleta girando para dar la sensacion de carga
                         console.log("Dentro antes de explotar");
+                        console.log(response);
                         modal.css("display","none");
                         btn.css("display","none");
                         var respuesta = JSON.parse(response);
-                        balance.text(respuesta.cantidad);
+                        balance.text(respuesta.coins);
                         spanUsuario.text(respuesta.nombre);
                         inputName.val(respuesta.nombre);
                         inputName.val(respuesta.id);
@@ -59,6 +60,7 @@ $(document).ready(function(){
                         btn.css("display","none");
                         var respuesta = JSON.parse(response);
                         spanUsuario.text(respuesta.nombre);
+                        balance.text(respuesta.coins);
                         inputName.val(respuesta.nombre);
                         inputName.val(respuesta.id);
                         console.log("Registro correcto");

@@ -72,7 +72,7 @@ $(document).ready(function(){
 		var ganadores = JSON.parse(json);
 			//apuestas ganadass
 			if(bool){
-				$(apuesta).css("right","50px");
+				$(apuesta).css("right","10px");
 				$(apuesta).css("opacity","1")
 				$(apuesta).css("color","green");
 				//esta sera la cantidad que hemos ganado cuando el server la calcule y nos la devuelva
@@ -82,14 +82,14 @@ $(document).ready(function(){
 					$(this).text(nuevoBalance).fadeTo(350,1);
 				});
 				$(apuesta).fadeTo(1500,0).animate({
-					'right': '130px'
+					'right': '90px'
 				}, {duration: 1500, queue: false}, function() {
 					//Animacion completada.a
 				}
 			);
 			//apuestas perdidas
 		}else{
-			$(apuesta).css("right","50px");
+			$(apuesta).css("right","10px");
 			$(apuesta).css("opacity","1")
 			$(apuesta).css("color","red");
 			//esta sera la cantidad que perdemos de lo apostado se obtiene del objeto antes de enviarlo
@@ -99,7 +99,7 @@ $(document).ready(function(){
 				$(this).text(nuevoBalance).fadeTo(350,1);
 			});
 			$(apuesta).fadeTo(1500,0).animate({
-				'right': '130px'
+				'right': '90px'
 			}, {duration: 1500, queue: false}, function() {
 				//Animacion completada.
 			}

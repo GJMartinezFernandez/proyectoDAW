@@ -77,7 +77,7 @@
                        <input type="text"name="email">
                         <label>Contraseña</label>
                         <input type="password" name="password">
-											<button type="submit" id="submitLogin">Sign In</button>
+											<button type="button" id="submitLogin">Sign In</button>
 										</form>
 									</div>
 
@@ -91,7 +91,7 @@
 											<label>Email</label>
                       <input type="text"	name="email"> <label>Contraseña</label> <input
 												type="password" name="password">
-											<button type="submit" id="submitRegister">Join now</button>
+											<button type="button" id="submitRegister">Join now</button>
 										</form>
 									</div>
 
@@ -121,8 +121,11 @@
       </div>
       <div class="hero-unit balance">
         <p> Apuesta:  <input type="number" value='0' id="dineroApuesta" class="inputApuesta"><button id="limpiar">Limpiar</button></p>
-        <p> balance: <span id="balance">1000</span></p>
-        <p  id="apuesta"></p>
+        <div class="demo" style="   margin-top: 10px;	width: 40px;	display: inline-block;	margin-right: 40px;">
+        <span style="display:inline-flex;">Balance:<p style="margin-right:20px;" id="balance">1000</p></span></div>
+	<div style="display:inline-block;width:100px;position: relative;">
+		<p style="font-size: 20px;color: rgb(0, 128, 0);opacity: 1;right: 20px;position: absolute;top: -10px;" id="apuesta"></p>
+	</div>
       </div>
       <!-- Example row of columns -->
       <div class="row">
