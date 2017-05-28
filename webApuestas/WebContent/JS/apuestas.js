@@ -18,13 +18,14 @@ $(document).ready(function(){
 	function apostar(){
 		var boton = $(this);
 		var p = boton.next();
-		var span = $('<span></span><br>');
 		var coins = $('#dineroApuesta').val();
 		var balance = parseInt($('#balance').text());
-		var jug = new Apuesta(1,coins,colorApostado($(this).attr("id")));
+        var color = colorApostado($(this).attr("id"));
+		var jug = new Apuesta(1,coins,color);
         var json = JSON.stringify(jug);
-
-		//TODO Falta recuperar nombre del jugador y bloquear botones
+        var nombre = 'alex';
+        
+		//TODO Falta recuperar nombre del jugador
 		if(coins <= balance && coins>0){
             listaApuestas[listaApuestas.length] = jug;
 			$.ajax({
@@ -35,14 +36,15 @@ $(document).ready(function(){
 	                    if(response==1){                        
 	                    	boton.prop("disabled", true);
 	                    	pintar(json,false);
+                            var apuestaNueva = new apuestaRecibida(nombre,coins,color);
+                            send(JSON.stringify(apuestaNueva));
 	                    }
 	            },
 	            error: function (){
 	                        console.log("error")
 	                    }
 	    });
-			span.text(coins);
-			p.append(span);
+
 		}
 	}
 	

@@ -30,6 +30,7 @@ import com.mysql.jdbc.Statement;
 @Path("/server")
 public class servidor extends HttpServlet{
 	
+	static ArrayList<String> ipJugadores = new ArrayList<String>();
 	static ArrayList<Apuesta> apuestas = new ArrayList<Apuesta>();
 	static  final int MAX_TIME = 20;
 	static int numero=MAX_TIME;
@@ -133,8 +134,8 @@ public class servidor extends HttpServlet{
 	
 	@GET 
 	@Path("/login/{json}")
-	public String login( @PathParam("json") String json){
-		System.out.println("Dentro");
+	public String login( HttpServletRequest request, @PathParam("json") String json){
+
 		Gson gson = new Gson();
 		Properties properties = gson.fromJson(json, Properties.class);
 		Jugador jugador =  new Jugador(null,properties.getProperty("email"),properties.getProperty("password"));
@@ -151,7 +152,7 @@ public class servidor extends HttpServlet{
 			else{
 			    do{
 			    	//devuelve el id, nombre y coins 
-			    	System.out.println("Creando jugador");
+			    	 //ipJugadores.add(request.getRemoteAddr());
 			    	 j1= new Jugador(rs.getInt(1),rs.getString(2),rs.getInt(5));
 			    } 
 			    while(rs.next());
