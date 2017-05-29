@@ -21,6 +21,28 @@
     });
 	}
 	
+
+    function pedirNumerosAnteriores(){
+        
+        $.ajax({
+            url:   'services/server/numerosAnteriores',
+            type:  'get',
+            success:  function (response) {
+                   var numeros = JSON.parse(response);
+                   var salida=" ";
+                   var spanNumeros = $('#numerosAnteriores');
+                   for(var i = 0; i<numeros.length;i++){
+                       salida+=numeros[i]+" ";
+                   }
+                   spanNumeros.text(salida);
+            },
+            error: function (){
+                        console.log("error")
+                    }
+    });
+    }
+
+    
 	function bajarCronometro(){
 		var idInterval = setInterval(function(){
 			if(cronometro>0){
@@ -28,6 +50,7 @@
 				txtnumero.text('' + cronometro);
 			}else{
 				pedirNumero();
+                pedirNumerosAnteriores();
 				clearInterval(idInterval);
 				bloquearBotones();
 			}

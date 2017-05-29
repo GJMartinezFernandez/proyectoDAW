@@ -23,7 +23,7 @@ $(document).ready(function(){
         var color = colorApostado($(this).attr("id"));
 		var jug = new Apuesta(1,coins,color);
         var json = JSON.stringify(jug);
-        var nombre = 'alex';
+        var nombre = $('#usuario').text();
         
 		//TODO Falta recuperar nombre del jugador
 		if(coins <= balance && coins>0){

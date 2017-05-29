@@ -31,7 +31,7 @@ import com.mysql.jdbc.Statement;
 @Path("/server")
 public class servidor extends HttpServlet{
 	
-	static ArrayList<String> ipJugadores = new ArrayList<String>();
+	static ArrayList<Integer> listaNumerosAnteriores = new ArrayList<Integer>();
 	static ArrayList<Apuesta> apuestas = new ArrayList<Apuesta>();
 	static  final int MAX_TIME = 20;
 	static int numero=MAX_TIME;
@@ -46,9 +46,17 @@ public class servidor extends HttpServlet{
 	}
 	
 	@GET
+	@Path("/numerosAnteriores")
+	public String getNumerosAnteriores(){
+		Gson gson = new Gson();
+		String json = gson.toJson(listaNumerosAnteriores);
+		return json;
+	}
+	
+	@GET
 	@Path("/apostar/{json}")
 	public int apostar(HttpServletRequest request , @PathParam("json") String json){
-		//TODO Actualizar BD con la apuesta e introducir jugador dentro de una lista
+
 
 		int respuesta = 1;
 		Gson gson = new Gson();
@@ -61,7 +69,7 @@ public class servidor extends HttpServlet{
 			s.executeUpdate("UPDATE usuarios SET coins = coins - " + jugador.getCoins() + " WHERE id = " + jugador.getId());
 			apuestas.add(jugador);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		return respuesta;
@@ -91,7 +99,7 @@ public class servidor extends HttpServlet{
 			    premios.add(premio);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
@@ -126,7 +134,7 @@ public class servidor extends HttpServlet{
 			    premios.add(premio);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
@@ -149,21 +157,22 @@ public class servidor extends HttpServlet{
 			ResultSet rs = s.executeQuery ("select * from usuarios where email='"+jugador.email+"' and pass = '"+jugador.pass+"'");
 			if(!rs.next()){ 
 			    System.out.println("no hay filas");  
+			    result = "Fail";
 			    //devolver algo para saber que no coinciden
 			}
 			else{
 			    do{
 			    	//devuelve el id, nombre y coins 
-			    	 //ipJugadores.add(request.getRemoteAddr());
-			    	 j1= new Jugador(rs.getInt(1),rs.getString(2),rs.getInt(5));
+			    	 j1= new Jugador(rs.getInt(1),rs.getString(2),rs.getInt(5));			    	 
 			    } 
 			    while(rs.next());
+			    result = gson.toJson(j1);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
-		result = gson.toJson(j1);
+		
 		return result;
 	}
 
@@ -192,7 +201,7 @@ public class servidor extends HttpServlet{
 			    System.out.println("El usuario ya existe");
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
@@ -244,13 +253,13 @@ public class servidor extends HttpServlet{
 			String sURL = "jdbc:mysql://localhost:3306/web_apuestas";
 			con = (Connection) DriverManager.getConnection(sURL,"root","");
 		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
@@ -261,6 +270,10 @@ public class servidor extends HttpServlet{
 		if(numero==0){
 			Random r = new Random();
 			numeroGanador = r.nextInt(15);
+			listaNumerosAnteriores.add(numeroGanador);
+			if(listaNumerosAnteriores.size() > 8){
+				listaNumerosAnteriores.remove(0);
+			}
 			actualizarBD();
 		}else{
 			numero-=1;;
@@ -279,7 +292,7 @@ public class servidor extends HttpServlet{
 			}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		

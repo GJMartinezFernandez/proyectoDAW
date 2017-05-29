@@ -10,6 +10,7 @@ var multiplicador;
 var tiempoMoverRuleta = 2000;
 var tiempoResetRuleta = 1000;
 var tiempEsperaReset = 3000;
+
     function pedirNumero(){
     	$.ajax({
             url:   'services/server/numeroGanador',
@@ -42,8 +43,9 @@ var tiempEsperaReset = 3000;
     	$('.ruleta').animate({
   		  'background-position-x': '-='+ movimiento +'px'
   		}, tiempoMoverRuleta, 'swing',ganar);
-
-    	}
+        
+        posIni = movimiento;
+    }
 
     function buscarPosicion(numero){
     	var pos;

@@ -1,4 +1,6 @@
 var webSocket;
+var ipServer = "192.168.1.20";
+var puertoServer = "8090";
 
 function apuestaRecibida(nombre,coins,color){
     this.nombre = nombre;
@@ -18,7 +20,7 @@ function openSocket(){
         return;
     }
             
-     webSocket = new WebSocket("ws://192.168.1.20:8090/webApuestas/EchoServer");
+     webSocket = new WebSocket("ws://"+ipServer+":"+puertoServer+"/webApuestas/EchoServer");
                  
 
      webSocket.onopen = function(event){

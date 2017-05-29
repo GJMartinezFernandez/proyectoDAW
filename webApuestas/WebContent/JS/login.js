@@ -21,17 +21,22 @@ $(document).ready(function(){
         url:   'services/server/login/' + data,
         success:  function (response) {
           //añadir un div con una ruleta girando para dar la sensacion de carga
-                        console.log("Dentro antes de explotar");
-                        console.log(response);
-                        modal.css("display","none");
-                        btn.css("display","none");
-                        var respuesta = JSON.parse(response);
-                        balance.text(respuesta.coins);
-                        spanUsuario.text(respuesta.nombre);
-                        inputName.val(respuesta.nombre);
-                        inputName.val(respuesta.id);
-                        console.log("login correcto");
+             console.log(response);
+             
+            if(response == 'Fail'){
+                            
+                 alert("No existe el usuario");
 
+            }else{
+                      
+                            
+                 balance.text(respuesta.coins);
+                 spanUsuario.text(respuesta.name);
+                 inputName.val(respuesta.name);
+                 inputName.val(respuesta.id);
+                 console.log("login correcto");
+            }
+                       
           },
           error: function(xhr, status, error,exc) {
                     console.log(exc);
@@ -59,9 +64,9 @@ $(document).ready(function(){
                         modal.css("display","none");
                         btn.css("display","none");
                         var respuesta = JSON.parse(response);
-                        spanUsuario.text(respuesta.nombre);
+                        spanUsuario.text(respuesta.name);
                         balance.text(respuesta.coins);
-                        inputName.val(respuesta.nombre);
+                        inputName.val(respuesta.name);
                         inputName.val(respuesta.id);
                         console.log("Registro correcto");
 
