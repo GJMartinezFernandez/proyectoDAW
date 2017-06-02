@@ -1,6 +1,6 @@
 var webSocket;
-var ipServer = "192.168.1.20";
-var puertoServer = "8090";
+var ipServer = "192.168.101.151";
+var puertoServer = "8080";
 
 function apuestaRecibida(nombre,coins,color){
     this.nombre = nombre;
@@ -51,7 +51,7 @@ function openSocket(){
      };
  
      webSocket.onclose = function(event){
-        writeResponse("Connection closed");
+        writeResponse(event);
      };
 }
            
@@ -66,5 +66,5 @@ function closeSocket(){
  }
  
 function writeResponse(text){
-    alert(text);
+    console.log(text);
 }

@@ -5,6 +5,8 @@ $(document).ready(function(){
     var inputName = $('#nombre');
     var inputId = $('#id');
     var balance = $('#balance');
+    var botonCerrar = $('#btnCerrar');
+    botonCerrar.hide();
     //logearse
     $('#submitLogin').click(function(){
 
@@ -28,12 +30,14 @@ $(document).ready(function(){
                  alert("No existe el usuario");
 
             }else{
-                      
-                            
+                       modal.css("display","none");
+                        btn.css("display","none");
+            	 var respuesta = JSON.parse(response);
                  balance.text(respuesta.coins);
                  spanUsuario.text(respuesta.name);
                  inputName.val(respuesta.name);
                  inputName.val(respuesta.id);
+                botonCerrar.show();
                  console.log("login correcto");
             }
                        
@@ -66,6 +70,7 @@ $(document).ready(function(){
                         var respuesta = JSON.parse(response);
                         spanUsuario.text(respuesta.name);
                         balance.text(respuesta.coins);
+                        botonCerrar.show();
                         inputName.val(respuesta.name);
                         inputName.val(respuesta.id);
                         console.log("Registro correcto");

@@ -60,7 +60,7 @@ body{
     margin-top: 20px;
 }
 
-.btnRojo, .btnRojo:active, .btnRojo:hover{
+.btnRojo, .btnRojo:active, .btnRojo:hover, .btnRojo[disabled]{
     background-color: red;
     background-image: linear-gradient(to bottom,#FF4646,#FF0000);
     border-color: #FF0000 #FF0000 #FF0000;
@@ -73,7 +73,7 @@ body{
     outline: 1px solid #FF0000; 
 }
 
-.btnVerde, .btnVerde:active, .btnVerde:hover{
+.btnVerde, .btnVerde:active, .btnVerde:hover, .btnVerde[disabled]{
      background-color: #00FF04;
      background-image: linear-gradient(to bottom,#5BFF5E,#00FF04);
 }
@@ -82,7 +82,7 @@ body{
     background-image: linear-gradient(to bottom,#5BFF5E,#00FF04);
     outline: 1px solid #00FF04; 
 }
-.btnNegro, .btnNegro:active, .btnNegro:hover{
+.btnNegro, .btnNegro:active, .btnNegro:hover, .btnNegro[disabled]{
      background-color: black;
      background-image: linear-gradient(to bottom,#494949,#000000);
 }
@@ -316,4 +316,10 @@ to {
 
 .tab-content {
 	overflow: initial;
+}
+#usuario{
+    line-height: 35px;
+    font-size: 20px;
+    margin-right: 15px;
+    color: white;
 }
