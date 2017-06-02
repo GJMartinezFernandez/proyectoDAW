@@ -1,54 +1,116 @@
+var total = 0
 $(document).ready(function () {
-    console.log("Cookie: "+getCookie("carrito"))
+    initCart()
+    $('#btn-comprar').click(function () {
+        var jsonFinal = {};
+        var cantidades = [];
+        var ids = []
+        $('.inp-cantidad').each(function (key, element) {
+            cantidades.push($(element).val());
+            ids.push($(element).attr("id"));
+        });
+        for (i in cantidades) {
+            jsonFinal[i] = {
+                id: ids[i]
+                , cantidad: cantidades[i]
+            }
+        }
+        var jsonStringCompra = JSON.stringify(jsonFinal)
+        $.ajax({
+            type: 'GET'
+            , url: 'services/server/comprafinal/' + jsonStringCompra
+            , success: function (data) {
+                alert("Compra realizada correctamente")
+            }
+        })
+    })
+})
+
+function initCart() {
+    //console.log("Cookie: " + getCookie("carrito"))
     var arrayIds = getCookie("carrito").split(',')
-    console.log("Array split:" + arrayIds)
+        //console.log("Array split:" + arrayIds)
     var json = [];
-    
     for (i in arrayIds) {
         json[i] = arrayIds[i]
     }
-    
-    console.log(json)
     var jsonString = JSON.stringify(json)
-    console.log("JSON Stringify: "+ JSON.stringify(json))
+        //console.log("JSON Stringify: " + JSON.stringify(json))
     $.ajax({
         type: 'GET'
         , url: 'services/server/getcarrito/' + jsonString
         , success: function (data) {
-            var json = "[" + JSON.parse(data) + "]";
-            console.log(data)
-                /*for (i in json) {
-                    var id = json[i].id
-                    var name = json[i].name
-                    var stock = json[i].stock
-                    var price = json[i].price
-                    var image = json[i].image
-                    stock = comprobarStock(stock)
-                    createPresent(id, name, stock, price, image, button)
-                }*/
+            var json = JSON.parse(data)
+                //console.log(json)
+            for (i in json) {
+                var id = json[i].id
+                var name = json[i].name
+                var stock = json[i].stock
+                var price = json[i].price
+                var image = json[i].image
+                stock = comprobarStock(stock)
+                createTr(id, name, stock, price, image)
+            }
+            $('#total').text(total + " Coins")
         }
     });
-    //createTr()
-})
-
-function createTr() {
-    $('#addRow').prepend('<tr> <td class="col-sm-8 col-md-6"><div class="media"> <a class ="thumbnail pull-left" href="#"> <img class="media-object" src="http://icons.iconarchive.com/icons/custom-icon-design/flatastic-2/72/product-icon.png" style="width: 72px; height: 72px;"></a><div class="media-body"><h4 class="media-heading"> <a href="#">Product name</a></h4><h5 class="media-heading">Ref: ' + id + '</h5><span> Status: </span><span class="text-success"><strong>In Stock</strong></span></div></div></td><td class="col-sm-1 col-md-1" style="text-align: center"><input type="email" class="form-control" id="exampleInputEmail1" value="3"></td><td class="col-sm-1 col-md-1 text-center"><strong>$4.87</strong></td><td class="col-sm-1 col-md-1 text-center"><strong>$14.61</strong></td><td class="col-sm-1 col-md-1"><button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Remove </button></td></tr>');
 }
+
+function createTr(id, name, stock, price, image) {
+    //var cantidad = $('#cantidad').value()
+    //$('#addRow').empty()
+    var cantidad = 1
+    $('#addRow').prepend('<tr> <td class="col-sm-8 col-md-6"><div class="media"> <a class ="thumbnail pull-left" href="#"> <img class="media-object" src="' + image + '" style="width: 72px; height: 72px;"></a><div class="media-body"><h4 class="media-heading"> <a href="#">' + name + '</a></h4><h5 class="media-heading">Num Ref: ' + id + '</h5><span> Estado: </span><span class="text-success">' + stock + '</span></div></div></td><td class="col-sm-1 col-md-1" style="text-align: center"><input type="email" class="form-control inp-cantidad" value="' + cantidad + '" id="' + id + '"></td><td class="col-sm-1 col-md-1 text-center"><strong>' + price + ' Coins</strong></td><td class="col-sm-1 col-md-1 text-center"><strong>' + price * cantidad + ' Coins</strong></td><td class="col-sm-1 col-md-1"><button type="button" class="btn btn-danger btn-remove" id="' + id + '"><span class="glyphicon glyphicon-remove"></span> Remove </button></td></tr>');
+    total = total + (price * cantidad)
+}
+$(document).on('click', '.btn-remove', function () {
+    var present = $(this).attr("id")
+        //console.log(present)
+    var arrayIds = getCookie("carrito").split(',')
+        //console.log(arrayIds)
+    for (i in arrayIds) {
+        if (arrayIds.indexOf(present) >= 0) {
+            arrayIds.splice(i, 1)
+        }
+    }
+    //console.log(arrayIds)
+    setCookie("carrito", arrayIds, 1)
+    location.reload();
+});
+$(document).on('keypress', '.inp-cantidad', function (e) {
+    if (e.which == 13) {
+        var cantidad = $(this).val()
+        var priceTxt = $(this).parent().next().children(0).text()
+        var price = parseFloat(priceTxt.substr(0, priceTxt.indexOf('C')))
+        var total = cantidad * price
+            //console.log(price)
+        var totalAntiguo = parseFloat($(this).parent().next().next().children(0).text().substr(0, $(this).parent().next().next().children(0).text().indexOf('C')))
+        console.log(totalAntiguo)
+        $(this).parent().next().next().children(0).text(total + " Coins")
+        var totalFinal = $('#total').text().substr(0, $('#total').text().indexOf('C'))
+        totalFinal = (totalFinal - totalAntiguo) + total
+        $('#total').text(totalFinal + " Coins")
+    }
+});
 
 function comprobarStock(stock) {
     var html = ""
     switch (true) {
     case stock > 10:
-        html = '<p class="stock stock-verde"> En Stock </p>'
+        html = '<strong class="stock stock-verde">En Stock</strong>'
         break;
     case stock <= 10 && stock > 0:
-        html = '<p class="stock stock-amarillo"> En Stock </p>'
-        break;
-    case stock <= 0:
-        html = '<p class="stock stock-rojo">No Stock</p>'
+        html = '<strong class="stock stock-amarillo">En Stock</strong>'
         break;
     }
     return html
+}
+
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    var expires = "expires=" + d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
 function getCookie(cname) {
