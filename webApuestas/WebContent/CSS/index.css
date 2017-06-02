@@ -323,3 +323,13 @@ to {
     margin-right: 15px;
     color: white;
 }
+.btn-cerrar{
+    background-image: url("../imagenes/logout-32.png");
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+    
+}
