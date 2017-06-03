@@ -21,6 +21,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 import com.mysql.jdbc.Connection;
@@ -206,6 +207,33 @@ public class servidor extends HttpServlet{
 		}
 		
 		result = gson.toJson(jugador);
+		return result;
+	}
+	
+	@GET
+	@Path("comprar/{json}")
+	public String comprar(@PathParam("json") String json){
+		Gson gson = new Gson();
+
+		Type type = new TypeToken<List<Premio>>(){}.getType();
+	    List<Premio> premios = new Gson().fromJson(json, type);
+	    int cod;
+	    String result="OK";
+	    
+	    for (int i=0;i<premios.size();i++) {
+	        Premio articulo = premios.get(i);
+	        try {
+				Connection conexion = getConnection();
+				Statement s = (Statement) conexion.createStatement(); 
+				cod = s.executeUpdate("UPDATE premios SET stock = stock - " + articulo.getStock() + " WHERE id = " + articulo.getId() + ";");
+				if(cod==0){
+					result = "Fail";
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+	      }
+		
 		return result;
 	}
 	

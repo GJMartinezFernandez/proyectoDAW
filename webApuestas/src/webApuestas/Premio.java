@@ -16,6 +16,12 @@ public class Premio {
 		this.image = image;
 	}
 	
+	public Premio(int id,int stock){
+		this.id = id;
+		this.stock = stock;
+
+	}
+	
 	public void setId(int id){
 		this.id = id;
 	}
