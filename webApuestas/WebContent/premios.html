@@ -8,11 +8,32 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="CSS/premios.css">
     <script src="./JS/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="JS/premios.js"></script>
 </head>
 
 <body>
-    <a href="carrito.html" type="button" class="btn btn-default"> <span class="glyphicon glyphicon-shopping-cart"></span> Carrito <span id="num_items">(0)</span> </a>
+    <nav class="navbar navbar-inverse" id="barraNav">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> <a class="navbar-brand" href="#">Ruleta</a> </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="webApuestas.html">Home</a></li>
+                    <li class="active"><a href="premios.html">Premios  <span class="sr-only">(current)</span></a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="carrito.html" type="button"> <span class="glyphicon glyphicon-shopping-cart"></span> Carrito <span id="num_items">(0)</span> </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
     <div class="container" id="contenedorArticulos">
         <div class="row presents"></div>
         <center>

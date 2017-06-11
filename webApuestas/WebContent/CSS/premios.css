@@ -322,3 +322,7 @@ td {
 .stock-amarillo {
     color: #FFD500;
 }
+
+#barraNav {
+    border-radius: 0px;
+}

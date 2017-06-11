@@ -23,13 +23,22 @@ $(document).ready(function () {
         var present = $(this).attr("id")
         carrito.push(present)
         setCookie("carrito", carrito, 1)
-        //console.log(document.cookie)
-        //console.log(carrito)
+            //console.log(document.cookie)
+            //console.log(carrito)
         alert("Añadido Al Carrito")
         var count = countItems()
         $('#num_items').text("(" + count + ")")
     });
 });
+
+function comprobarCookie() {
+    if (getCookie("usuario") == "") {
+        return 0
+    }
+    else {
+        return 1
+    }
+}
 
 function countItems() {
     var count = 0;
@@ -69,10 +78,10 @@ function comprobarStock(stock) {
 function printButtonAddCart(stock, id) {
     var html = ""
     switch (true) {
-    case stock <= 0:
+    case stock <= 0 || comprobarCookie() == 0:
         html = ''
         break;
-    case stock > 0:
+    case stock > 0 && comprobarCookie() != 0:
         html = '<p class="btn-add" id="' + id + '"><i class="fa fa-shopping-cart"></i><a href="#" class="hidden-sm">Add to cart</a></p>'
         break;
     }

@@ -2,7 +2,7 @@ var total = 0
 $(document).ready(function () {
     initCart()
     $('#btn-comprar').click(function () {
-        var jsonFinal = {};
+        var jsonFinal = [];
         var cantidades = [];
         var ids = []
         $('.inp-cantidad').each(function (key, element) {
@@ -12,14 +12,15 @@ $(document).ready(function () {
         for (i in cantidades) {
             jsonFinal[i] = {
                 id: ids[i]
-                , cantidad: cantidades[i]
+                , stock: cantidades[i]
             }
         }
         var jsonStringCompra = JSON.stringify(jsonFinal)
         $.ajax({
             type: 'GET'
-            , url: 'services/server/comprafinal/' + jsonStringCompra
+            , url: 'services/server/comprar/' + jsonStringCompra
             , success: function (data) {
+                setCookie("carrito", "", 1)
                 alert("Compra realizada correctamente")
             }
         })
@@ -127,4 +128,8 @@ function getCookie(cname) {
         }
     }
     return "";
+}
+
+function delete_cookie(cname) {
+    document.cookie = cname + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 }
