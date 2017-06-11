@@ -3,6 +3,7 @@
 	$(document).ready(function(){
 		txtnumero = $('#contador');
 		pedirCronometro();	
+        pedirNumerosAnteriores();
 	});
 	
 	
@@ -29,10 +30,10 @@
             type:  'get',
             success:  function (response) {
                    var numeros = JSON.parse(response);
-                   var salida=" ";
+                   var salida;
                    var spanNumeros = $('#numerosAnteriores');
                    for(var i = 0; i<numeros.length;i++){
-                       salida+=numeros[i]+" ";
+                       salida+=numeros[i]+"</span> ";
                    }
                    spanNumeros.text(salida);
             },

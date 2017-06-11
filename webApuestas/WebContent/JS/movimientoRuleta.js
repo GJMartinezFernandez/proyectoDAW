@@ -65,6 +65,14 @@ var tiempEsperaReset = 3000;
         $('.ruleta').animate({
   		  'background-position-x': '+='+ posIni +'px'
   		}, tiempoResetRuleta, 'swing');
+        
+        var p = $('#btnRojo').next();
+        p.empty();
+        var p = $('#btnNegro').next();
+        p.empty();
+        var p = $('#btnVerde').next();
+        p.empty();
+        
     }
     
     function  ganar(){

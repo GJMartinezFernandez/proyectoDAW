@@ -1,5 +1,5 @@
 var webSocket;
-var ipServer = "192.168.101.151";
+var ipServer = "192.168.1.20";
 var puertoServer = "8080";
 
 function apuestaRecibida(nombre,coins,color){

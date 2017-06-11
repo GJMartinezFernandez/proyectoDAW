@@ -115,13 +115,13 @@ public class servidor extends HttpServlet{
 		Gson gson = new Gson();	
 		Premio premio = null;
 		ArrayList<Premio> premios = new ArrayList<Premio>();
-		TypeToken<List<String>> token = new TypeToken<List<String>>() {};
-		List<String> ids = new Gson().fromJson(json, token.getType());
+		TypeToken<List<ProductoComprado>> token = new TypeToken<List<ProductoComprado>>() {};
+		List<ProductoComprado> ids = new Gson().fromJson(json, token.getType());
 		String condicion="";
 		if(ids.size()>0){
-			condicion = ids.get(0);
+			condicion += ids.get(0).getId();
 			for(int i = 1;i<ids.size();i++){
-				condicion+=","+ids.get(i);
+				condicion+=","+ids.get(0).getId();;
 			}
 		}
 		
@@ -132,6 +132,11 @@ public class servidor extends HttpServlet{
 			while (rs.next()) 
 			{ 
 			    premio = new Premio(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getInt(4),rs.getString(5));
+			    for(int j=0;j<ids.size();j++){
+			    	if(ids.get(j).getId() == premio.getId()){
+			    		premio.setCantidadComprada(ids.get(j).cantidadComprada);
+			    	}
+			    }
 			    premios.add(premio);
 			}
 		} catch (SQLException e) {

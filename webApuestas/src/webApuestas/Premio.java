@@ -7,6 +7,7 @@ public class Premio {
 	private int price;
 	private int stock;
 	private String image;
+	private int cantidadComprada;
 	
 	public Premio(int id, String name, int price, int stock, String image){
 		this.id = id;
@@ -19,8 +20,8 @@ public class Premio {
 	public Premio(int id,int stock){
 		this.id = id;
 		this.stock = stock;
-
 	}
+	
 	
 	public void setId(int id){
 		this.id = id;
@@ -60,6 +61,14 @@ public class Premio {
 	
 	public String getImage(){
 		return this.image;
+	}
+	
+	public void setCantidadComprada(int cantidad){
+		this.cantidadComprada = cantidad;
+	}
+	
+	public int getCantidadComprada(){
+		return this.cantidadComprada;
 	}
 	
 }
