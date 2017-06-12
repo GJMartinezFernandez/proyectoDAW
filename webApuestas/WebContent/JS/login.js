@@ -8,6 +8,11 @@ $(document).ready(function () {
     var botonCerrar = $('#btnCerrar');
     botonCerrar.hide();
     //logearse
+    $('#formLogin').keypress(function (e) {
+        if (e.which == 13) {
+            $('#submitLogin').click()
+        }
+    })
     $('#submitLogin').click(function () {
         var object = $('#formLogin').serializeArray().reduce(function (a, x) {
             a[x.name] = x.value;
@@ -34,7 +39,7 @@ $(document).ready(function () {
                     inputName.val(respuesta.id);
                     botonCerrar.show();
                     console.log("login correcto");
-                    createCookie(response)
+                    setCookie("usuario", response, 1)
                 }
             }
             , error: function (xhr, status, error, exc) {
@@ -65,7 +70,7 @@ $(document).ready(function () {
                 inputName.val(respuesta.name);
                 inputName.val(respuesta.id);
                 console.log("Registro correcto");
-                createCookie(response)
+                setCookie("usuario", response, 1)
             }
             , error: function (xhr, status, error, exc) {
                 console.log(exc);
@@ -73,8 +78,3 @@ $(document).ready(function () {
         });
     });
 });
-
-function createCookie(json) {
-    setCookie("usuario", json, 1)
-    console.log(getCookie("usuario"))
-}

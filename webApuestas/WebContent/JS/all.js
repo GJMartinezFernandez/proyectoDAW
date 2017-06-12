@@ -13,6 +13,21 @@ $(document).ready(function () {
             modal.css("display", "none");
         }
     }
+    if (getCookie("usuario") != "") {
+        $('#myBtn').hide()
+        var cookie = JSON.parse(getCookie("usuario"))
+        $('#usuario').text(cookie.name)
+        $('#balance').text(cookie.coins)
+        $('#btnCerrar').show()
+    }
+    $('#btnCerrar').click(function () {
+        deleteCookie("usuario")
+            //setCookie("usuario", "", 1)
+        location.reload()
+    })
+    $('#limpiar').click(function () {
+        $("#dineroApuesta").val(0)
+    })
 });
 
 function setCookie(cname, cvalue, exdays) {
@@ -37,3 +52,49 @@ function getCookie(cname) {
     }
     return "";
 }
+
+function getObjectKeyIndex(obj, keyToFind) {
+    var i = 0
+        , key;
+    for (key in obj) {
+        if (obj[key].id == keyToFind) {
+            return i;
+        }
+        i++;
+    }
+    return null;
+}
+
+function comprobarCookie() {
+    if (getCookie("usuario") == "") {
+        return 0
+    }
+    else {
+        return 1
+    }
+}
+
+function countItems() {
+    var count = 0;
+    aux = getCarrito()
+    for (i in aux) {
+        count = count + aux[i].cantidad
+    }
+    return count
+}
+
+function getCarrito() {
+    var carrito = []
+    aux = getCookie("carrito")
+    if (aux == "") {
+        return []
+    }
+    else {
+        return JSON.parse(getCookie("carrito"))
+    }
+}
+
+function deleteCookie(cname) {
+    var expires = "expires=Thu, 01 Jan 1970 00:00:01 GMT";
+    document.cookie = cname + "=" + "" + ";" + expires + ";path=/";
+};

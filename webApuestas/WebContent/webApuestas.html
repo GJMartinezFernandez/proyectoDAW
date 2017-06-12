@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="">
+
 <head>
     <meta charset="UTF-8">
     <title>Web Apuestas</title>
-	<meta name="Author" content=""/>
+    <meta name="Author" content="" />
     <link href="./bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="./bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
     <script src="./JS/jquery-1.12.4.min.js"></script>
@@ -11,148 +12,130 @@
     <script type="text/javascript" src="./JS/movimientoRuleta.js"></script>
     <script type="text/javascript" src="./JS/cronometro.js"></script>
     <script type="text/javascript" src="./JS/apuestas.js"></script>
-    <script type="text/javascript" src="./JS/all.js"></script>
     <script type="text/javascript" src="./JS/login.js"></script>
+    <script type="text/javascript" src="./JS/all.js"></script>
     <script type="text/javascript" src="./JS/sockets.js"></script>
     <link rel="stylesheet" type="text/css" href="CSS/index.css">
-    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-</head>
-<body>
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet"> </head>
 
+<body>
     <input type="hidden" id="nombre" value="">
     <input type="hidden" id="id" value="">
-
-<div class="navbar navbar-inverse navbar-fixed-top">
-		<div class="navbar-inner">
-			<div class="container">
-				<button type="button" class="btn btn-navbar" data-toggle="collapse"
-					data-target=".nav-collapse">
-					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="brand" href="#">Ruleta</a>
-				<div class="nav-collapse in collapse" style="height: auto;">
-					<ul class="nav">
-						<li class="active"><a href="#">Home</a></li>
-						<li><a href="premios.html">Premios</a></li>
-					
-					</ul>
-					<!-- <form class="navbar-form pull-right">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> <a class="brand" href="#">Ruleta</a>
+                <div class="nav-collapse in collapse" style="height: auto;">
+                    <ul class="nav">
+                        <li class="active"><a href="#">Home</a></li>
+                        <li><a href="premios.html">Premios</a></li>
+                    </ul>
+                    <ul class="nav pull-right">
+                        <li>
+                            <a href="#" id="usuario"></a>
+                        </li>
+                        <li id="myBtn"> <a href="#">Loguearse</a> </li>
+                        <li id="btnCerrar"><a href="#">Cerrar Sesion</a></li>
+                    </ul>
+                    <!-- <form class="navbar-form pull-right">
               <input class="span2" type="text" placeholder="Email">
               <input class="span2" type="password" placeholder="Password">
               <button type="submit" class="btn">Sign in</button>
             </form> -->
-					<button id="myBtn" type="submit" class="btn pull-right">Loguearse</button>
-          <!--span para el nombre del usuario-->
-                    
-                    <button id="btnCerrar" type="button"  class="btn-cerrar pull-right"></button>
-                      <span class="pull-right" id="usuario"></span>
-				</div>
-				<!--/.nav-collapse -->
-			</div>
-		</div>
-	</div>
-
-
-    	<div id="myModal" class="modalPrueba">
-
-		<!-- Modal content -->
-		<div class="modal-contentPrueba">
-
-			<div class="container modalRegistrarse">
-				<span class="closePrueba">&times;</span>
-				<div class="row">
-					<div class="col-md-4 col-md-offset-4">
-						<div class="form-body">
-
-							<ul class="nav nav-tabs final-login">
-
-								<li class="active"><a data-toggle="tab" href="#sectionA">Sign
-										In</a></li>
-								<li><a data-toggle="tab" href="#sectionB">Join us!</a></li>
-							</ul>
-
-							<div class="tab-content">
-								<div id="sectionA" class="tab-pane fade in active">
-									<div class="innter-form">
-										<form class="sa-innate-form" id="formLogin" action="" method="post">
-											<label>Email</label>
-                       <input type="text"name="email">
-                        <label>Contraseña</label>
-                        <input type="password" name="password">
-											<button type="button" id="submitLogin">Sign In</button>
-										</form>
-									</div>
-
-									<div class="clearfix"></div>
-								</div>
-								<div id="sectionB" class="tab-pane fade">
-									<div class="innter-form">
-										<form class="sa-innate-form" id="formRegister"method="post">
-                    <label>Nombre</label>
-                    <input type="text"name="username">
-											<label>Email</label>
-                      <input type="text"	name="email"> <label>Contraseña</label> <input
-												type="password" name="password">
-											<button type="button" id="submitRegister">Join now</button>
-										</form>
-									</div>
-
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-    <div class="container">
-
-      <!-- Main hero unit for a primary marketing message or call to action -->
-      <div class="hero-unit contador">
-        <p> CERRANDO APUESTAS EN: <span id="contador">CONTADOR</span> NUMEROS ANTERIORES <span id="numerosAnteriores"></span></p>
-      </div>
-      <div class="hero-unit">
-        <div class="ruleta-wrap">
-          <div class="ruleta">
-
-          </div>
-          <div class="indicador">
-
-          </div>
+                    <!--<button id="myBtn" type="submit" class="pull-right">Loguearse</button>
+                    <!--span para el nombre del usuario-->
+                    <!--<button id="btnCerrar" type="button" class="btn-cerrar pull-right"></button>-->
+                </div>
+                <!--/.nav-collapse -->
+            </div>
         </div>
-      </div>
-      <div class="hero-unit balance">
-        <p> Apuesta:  <input type="number" value='0' id="dineroApuesta" class="inputApuesta"><button id="limpiar">Limpiar</button></p>
-        <div class="demo" style="   margin-top: 10px;	width: 40px;	display: inline-block;	margin-right: 40px;">
-        <span style="display:inline-flex;">Balance:<p style="margin-right:20px;" id="balance">1000</p></span></div>
-	<div style="display:inline-block;width:100px;position: relative;">
-		<p style="font-size: 20px;color: rgb(0, 128, 0);opacity: 1;right: 20px;position: absolute;top: -10px;" id="apuesta"></p>
-	</div>
-      </div>
-      <!-- Example row of columns -->
-      <div class="row">
-        <div class="span4">
-          <button type="button" class="btn btn-primary btn-lg btn-block btnRojo action-button shadow animate red" id="btnRojo"> 1 HASTA 7 GANA X2</button>
-          <p></p>
-        </div>
-        <div class="span4">
-         <button type="button" class="btn btn-primary btn-lg btn-block btnVerde action-button shadow animate green" id="btnVerde"> 0, GANA X14</button>
-          <p> </p>
-       </div>
-        <div class="span4">
-          <button type="button" class="btn btn-primary btn-lg btn-block btnNegro action-button shadow animate black" id="btnNegro"> 8 HASTA 14 GANA X2</button>
-          <p> </p>
-        </div>
-      </div>
-
-      <hr>
-
-      <footer>
-        <p></p>
-      </footer>
-
     </div>
-
+    <div id="myModal" class="modalPrueba">
+        <!-- Modal content -->
+        <div class="modal-contentPrueba">
+            <div class="container modalRegistrarse"> <span class="closePrueba">&times;</span>
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-4">
+                        <div class="form-body">
+                            <ul class="nav nav-tabs final-login">
+                                <li class="active"><a data-toggle="tab" href="#sectionA">Sign
+										In</a></li>
+                                <li><a data-toggle="tab" href="#sectionB">Join us!</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div id="sectionA" class="tab-pane fade in active">
+                                    <div class="innter-form">
+                                        <form class="sa-innate-form" id="formLogin" action="" method="post">
+                                            <label>Email</label>
+                                            <input type="text" name="email">
+                                            <label>Contraseña</label>
+                                            <input type="password" name="password">
+                                            <button type="button" id="submitLogin">Sign In</button>
+                                        </form>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div id="sectionB" class="tab-pane fade">
+                                    <div class="innter-form">
+                                        <form class="sa-innate-form" id="formRegister" method="post">
+                                            <label>Nombre</label>
+                                            <input type="text" name="username">
+                                            <label>Email</label>
+                                            <input type="text" name="email">
+                                            <label>Contraseña</label>
+                                            <input type="password" name="password">
+                                            <button type="button" id="submitRegister">Join now</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <!-- Main hero unit for a primary marketing message or call to action -->
+        <div class="hero-unit contador">
+            <p> CERRANDO APUESTAS EN: <span id="contador">CONTADOR</span> NUMEROS ANTERIORES <span id="numerosAnteriores"></span></p>
+        </div>
+        <div class="hero-unit">
+            <div class="ruleta-wrap">
+                <div class="ruleta"> </div>
+                <div class="indicador"> </div>
+            </div>
+        </div>
+        <div class="hero-unit balance">
+            <p> Apuesta:
+                <input type="number" value='0' id="dineroApuesta" class="inputApuesta">
+                <button id="limpiar">Limpiar</button>
+            </p>
+            <div class="demo" style="   margin-top: 10px;	width: 40px;	display: inline-block;	margin-right: 40px;"> <span style="display:inline-flex;">Balance:<p style="margin-right:20px;" id="balance">1000</p></span></div>
+            <div style="display:inline-block;width:100px;position: relative;">
+                <p style="font-size: 20px;color: rgb(0, 128, 0);opacity: 1;right: 20px;position: absolute;top: -10px;" id="apuesta"></p>
+            </div>
+        </div>
+        <!-- Example row of columns -->
+        <div class="row">
+            <div class="span4">
+                <button type="button" class="btn btn-primary btn-lg btn-block btnRojo action-button shadow animate red" id="btnRojo"> 1 HASTA 7 GANA X2</button>
+                <p></p>
+            </div>
+            <div class="span4">
+                <button type="button" class="btn btn-primary btn-lg btn-block btnVerde action-button shadow animate green" id="btnVerde"> 0, GANA X14</button>
+                <p> </p>
+            </div>
+            <div class="span4">
+                <button type="button" class="btn btn-primary btn-lg btn-block btnNegro action-button shadow animate black" id="btnNegro"> 8 HASTA 14 GANA X2</button>
+                <p> </p>
+            </div>
+        </div>
+        <hr>
+        <footer>
+            <p></p>
+        </footer>
+    </div>
 </body>
+
 </html>

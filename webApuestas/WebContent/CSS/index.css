@@ -1,20 +1,23 @@
-body{
+body {
     font-family: 'Raleway', sans-serif;
 }
-.contador{
+
+.contador {
     padding: 20px;
     margin-top: 50px;
 }
-.hero-unit{
+
+.hero-unit {
     line-height: 0px;
     margin-bottom: 5px;
-
 }
-.ruleta-wrap{
+
+.ruleta-wrap {
     margin: 0 auto;
     position: relative;
 }
-.ruleta{
+
+.ruleta {
     max-height: 4.375rem;
     border-radius: .5rem;
     height: 4.125rem;
@@ -25,7 +28,7 @@ body{
     border: 1px solid #b3b3b3;
 }
 
-.ruleta-wrap .indicador{
+.ruleta-wrap .indicador {
     position: absolute;
     top: -.1875rem;
     margin-left: -2.375rem;
@@ -36,7 +39,7 @@ body{
     height: 100%;
     border: 3px solid #fff;
     border-radius: 4px;
-    box-shadow: 0 1px 4px rgba(0,0,0,.7);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .7);
 }
 
 .ruleta-wrap .indicador:after {
@@ -48,288 +51,304 @@ body{
     height: 100%;
     background-color: #fff;
 }
-.inputApuesta{
+
+.inputApuesta {
     margin-top: 7px;
     margin-right: 10px;
 }
-.balance{
+
+.balance {
     padding: 30px;
 }
-.span4 .btn{
+
+.span4 .btn {
     height: 50px;
     margin-top: 20px;
 }
 
-.btnRojo, .btnRojo:active, .btnRojo:hover, .btnRojo[disabled]{
+.btnRojo,
+.btnRojo:active,
+.btnRojo:hover,
+.btnRojo[disabled] {
     background-color: red;
-    background-image: linear-gradient(to bottom,#FF4646,#FF0000);
+    background-image: linear-gradient(to bottom, #FF4646, #FF0000);
     border-color: #FF0000 #FF0000 #FF0000;
-    
 }
 
-.btnRojo:focus{
+.btnRojo:focus {
     background-color: red;
-    background-image: linear-gradient(to bottom,#FF4646,#FF0000);
-    outline: 1px solid #FF0000; 
+    background-image: linear-gradient(to bottom, #FF4646, #FF0000);
+    outline: 1px solid #FF0000;
 }
 
-.btnVerde, .btnVerde:active, .btnVerde:hover, .btnVerde[disabled]{
-     background-color: #00FF04;
-     background-image: linear-gradient(to bottom,#5BFF5E,#00FF04);
-}
-.btnVerde:focus{
+.btnVerde,
+.btnVerde:active,
+.btnVerde:hover,
+.btnVerde[disabled] {
     background-color: #00FF04;
-    background-image: linear-gradient(to bottom,#5BFF5E,#00FF04);
-    outline: 1px solid #00FF04; 
-}
-.btnNegro, .btnNegro:active, .btnNegro:hover, .btnNegro[disabled]{
-     background-color: black;
-     background-image: linear-gradient(to bottom,#494949,#000000);
+    background-image: linear-gradient(to bottom, #5BFF5E, #00FF04);
 }
 
-.btnNegro:focus{
+.btnVerde:focus {
+    background-color: #00FF04;
+    background-image: linear-gradient(to bottom, #5BFF5E, #00FF04);
+    outline: 1px solid #00FF04;
+}
+
+.btnNegro,
+.btnNegro:active,
+.btnNegro:hover,
+.btnNegro[disabled] {
     background-color: black;
-    background-image: linear-gradient(to bottom,#494949,#000000);
-    outline: 1px solid #000000; 
-}
-.animate
-{
-	transition: all 0.1s;
-	-webkit-transition: all 0.1s;
+    background-image: linear-gradient(to bottom, #494949, #000000);
 }
 
-.action-button
-{
-	position: relative;
-	padding: 10px 40px;
-	border-radius: 10px;
-	font-family: 'Pacifico', cursive;
-	color: #FFF;
-	text-decoration: none;
+.btnNegro:focus {
+    background-color: black;
+    background-image: linear-gradient(to bottom, #494949, #000000);
+    outline: 1px solid #000000;
 }
 
-.black
-{
-	background-color: #000000;
-	    border-bottom: 5px solid #4b4b4b;
-	    text-shadow: 0px -2px #737373;
+.animate {
+    transition: all 0.1s;
+    -webkit-transition: all 0.1s;
 }
 
-.red
-{
-	background-color: #E74C3C;
-	border-bottom: 5px solid #BD3E31;
-	text-shadow: 0px -2px #BD3E31;
+.action-button {
+    position: relative;
+    padding: 10px 40px;
+    border-radius: 10px;
+    font-family: 'Pacifico', cursive;
+    color: #FFF;
+    text-decoration: none;
 }
 
-.green
-{
-	background-color: #82BF56;
-	border-bottom: 5px solid #669644;
-	text-shadow: 0px -2px #669644;
+.black {
+    background-color: #000000;
+    border-bottom: 5px solid #4b4b4b;
+    text-shadow: 0px -2px #737373;
 }
 
-.yellow
-{
-	background-color: #F2CF66;
-	border-bottom: 5px solid #D1B358;
-	text-shadow: 0px -2px #D1B358;
+.red {
+    background-color: #E74C3C;
+    border-bottom: 5px solid #BD3E31;
+    text-shadow: 0px -2px #BD3E31;
 }
 
-.action-button:active
-{
-	transform: translate(0px,5px);
-  -webkit-transform: translate(0px,5px);
-	border-bottom: 1px solid;
+.green {
+    background-color: #82BF56;
+    border-bottom: 5px solid #669644;
+    text-shadow: 0px -2px #669644;
 }
 
+.yellow {
+    background-color: #F2CF66;
+    border-bottom: 5px solid #D1B358;
+    text-shadow: 0px -2px #D1B358;
+}
+
+.action-button:active {
+    transform: translate(0px, 5px);
+    -webkit-transform: translate(0px, 5px);
+    border-bottom: 1px solid;
+}
 
 .modalPrueba {
-	display: none; /* Hidden by default */
-	position: fixed; /* Stay in place */
-	z-index: 1; /* Sit on top */
-	padding-top: 100px; /* Location of the box */
-	left: 0;
-	top: 0;
-	width: 100%; /* Full width */
-	height: 100%; /* Full height */
-	overflow: auto; /* Enable scroll if needed */
-	background-color: rgb(0, 0, 0); /* Fallback color */
-	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
 }
 
 .modal-contentPrueba {
-	position: relative;
-	background-color: #fefefe;
-	margin: auto;
-	padding: 0;
-	border: 1px solid #888;
-	width: 30%;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0
-		rgba(0, 0, 0, 0.19);
-	-webkit-animation-name: animatetop;
-	-webkit-animation-duration: 0.4s;
-	animation-name: animatetop;
-	animation-duration: 0.4s
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 30%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
 }
 
-@
--webkit-keyframes animatetop {
-	from {top: -300px;
-	opacity: 0
+@ -webkit-keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0
+    }
+    to {
+        top: 0;
+        opacity: 1
+    }
 }
 
-to {
-	top: 0;
-	opacity: 1
+@ keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0
+    }
+    to {
+        top: 0;
+        opacity: 1
+    }
 }
 
-}
-@
-keyframes animatetop {
-	from {top: -300px;
-	opacity: 0
-}
-
-to {
-	top: 0;
-	opacity: 1
-}
-
-}
 .closePrueba {
-	color: grey;
-	float: right;
-	font-size: 28px;
-	font-weight: bold;
+    color: grey;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
 }
 
-.closePrueba:hover, .closePrueba:focus {
-	color: #000;
-	text-decoration: none;
-	cursor: pointer;
+.closePrueba:hover,
+.closePrueba:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 .modal-headerPrueba {
-	padding: 2px 16px;
-	background-color: #5cb85c;
-	color: white;
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
 }
 
 .modal-bodyPrueba {
-	padding: 2px 16px;
+    padding: 2px 16px;
 }
 
 .modalRegistrarse {
-	width: 95%;
+    width: 95%;
 }
 
 .form-body {
-	background: #fff;
-	padding: 20px;
+    background: #fff;
+    padding: 20px;
 }
 
 .login-form {
-	background: rgba(255, 255, 255, 0.8);
-	padding: 20px;
-	border-top: 3px solid #3e4043;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-top: 3px solid #3e4043;
 }
 
 .innter-form {
-	padding-top: 20px;
+    padding-top: 20px;
 }
 
 .final-login li {
-	width: 50%;
+    width: 50%;
 }
 
 .nav-tabs {
-	border-bottom: none !important;
+    border-bottom: none !important;
 }
 
 .nav-tabs>li {
-	color: #222 !important;
+    color: #222 !important;
 }
 
-.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus
-	{
-	color: #fff;
-	background-color: #d14d42;
-	border: none !important;
-	border-bottom-color: transparent;
-	border-radius: none !important;
+.nav-tabs>li.active>a,
+.nav-tabs>li.active>a:hover,
+.nav-tabs>li.active>a:focus {
+    color: #fff;
+    background-color: #d14d42;
+    border: none !important;
+    border-bottom-color: transparent;
+    border-radius: none !important;
 }
 
 .nav-tabs>li>a {
-	margin-right: 2px;
-	line-height: 1.428571429;
-	border: none !important;
-	border-radius: none !important;
-	text-transform: uppercase;
-	font-size: 16px;
+    margin-right: 2px;
+    line-height: 1.428571429;
+    border: none !important;
+    border-radius: none !important;
+    text-transform: uppercase;
+    font-size: 16px;
 }
 
-.sa-innate-form input[type=text], input[type=password], input[type=file],
-	textarea, select, email {
-	font-size: 13px;
-	padding: 10px;
-	border: 1px solid #ccc;
-	outline: none;
-	width: 100%;
-	margin: 8px 0;
+.sa-innate-form input[type=text],
+input[type=password],
+input[type=file],
+textarea,
+select,
+email {
+    font-size: 13px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    outline: none;
+    width: 100%;
+    margin: 8px 0;
 }
 
 .sa-innate-form input[type=submit] {
-	border: 1px solid #e64b3b;
-	background: #e64b3b;
-	color: #fff;
-	padding: 10px 25px;
-	font-size: 14px;
-	margin-top: 5px;
+    border: 1px solid #e64b3b;
+    background: #e64b3b;
+    color: #fff;
+    padding: 10px 25px;
+    font-size: 14px;
+    margin-top: 5px;
 }
 
 .sa-innate-form input[type=submit]:hover {
-	border: 1px solid #db3b2b;
-	background: #db3b2b;
-	color: #fff;
+    border: 1px solid #db3b2b;
+    background: #db3b2b;
+    color: #fff;
 }
 
 .sa-innate-form button {
-	border: 1px solid #e64b3b;
-	background: #e64b3b;
-	color: #fff;
-	padding: 10px 25px;
-	font-size: 14px;
-	margin-top: 5px;
+    border: 1px solid #e64b3b;
+    background: #e64b3b;
+    color: #fff;
+    padding: 10px 25px;
+    font-size: 14px;
+    margin-top: 5px;
 }
 
 .sa-innate-form button:hover {
-	border: 1px solid #db3b2b;
-	background: #db3b2b;
-	color: #fff;
+    border: 1px solid #db3b2b;
+    background: #db3b2b;
+    color: #fff;
 }
 
 .sa-innate-form p {
-	font-size: 13px;
-	padding-top: 10px;
+    font-size: 13px;
+    padding-top: 10px;
 }
 
 .tab-content {
-	overflow: initial;
+    overflow: initial;
 }
-#usuario{
-    line-height: 35px;
-    font-size: 20px;
-    margin-right: 15px;
+
+#usuario {
     color: white;
 }
-.btn-cerrar{
+
+.btn-cerrar {
     background-image: url("../imagenes/logout-32.png");
     background-color: Transparent;
-    background-repeat:no-repeat;
+    background-repeat: no-repeat;
     border: none;
-    cursor:pointer;
+    cursor: pointer;
     overflow: hidden;
-    outline:none;
-    
+    outline: none;
 }
