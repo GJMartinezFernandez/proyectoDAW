@@ -19,7 +19,39 @@ $(document).ready(function () {
     for (var i = 0; i < boton.length; i++) {
         boton[i].addEventListener('click', apostar);
     }
+    traerApuestas();
+    
 });
+
+
+function traerApuestas(){
+     $.ajax({
+            url: 'services/server/apuestasRealizadas/'
+            , type: 'get'
+            , dataType: "json"
+            , success: function (response) {
+               console.log(response);
+               var p;
+               for(var i = 0;i<response.length;i++){
+                   switch(response[i].color){
+                       case "rojo": p = $('#btnRojo').next();
+                                    break;
+                       case "verde": p = $('#btnVerde').next();
+                                    break;
+                       case "negro": p = $('#btnNegro').next();
+                                    break;
+                   }
+                     p.append('<span class="apuestasNombre">' + response[i].nombre + '</span><span class="apuestasCantidad">' + response[i].coins + '</span><br>');
+               }
+                
+            
+            }
+            , error: function () {
+                console.log("error")
+            }
+        });
+}
+
 
 function apostar() {
     if (comprobarCookie() == 0) {

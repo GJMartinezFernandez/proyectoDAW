@@ -47,6 +47,21 @@ public class servidor extends HttpServlet{
 	}
 	
 	@GET
+	@Path("/apuestasRealizadas")
+	public String getApuestasRealizadas(){
+		String json = "[";
+		if(EchoServer.apuestasRealizadas.size() > 0){
+			json+=EchoServer.apuestasRealizadas.get(0);
+		}
+		
+		for(int i = 1;i < EchoServer.apuestasRealizadas.size();i++){
+			json+=","+EchoServer.apuestasRealizadas.get(i);
+		}
+		json +="]"; 
+		return json;
+	}
+	
+	@GET
 	@Path("/numerosAnteriores")
 	public String getNumerosAnteriores(){
 		Gson gson = new Gson();
@@ -307,6 +322,7 @@ public class servidor extends HttpServlet{
 			if(listaNumerosAnteriores.size() > 8){
 				listaNumerosAnteriores.remove(0);
 			}
+			EchoServer.apuestasRealizadas.clear();
 			actualizarBD();
 		}else{
 			numero-=1;;

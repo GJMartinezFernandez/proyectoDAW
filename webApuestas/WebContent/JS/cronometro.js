@@ -30,9 +30,17 @@
 	            console.log(numeros)
 	            var salida = "";
 	            var spanNumeros = $('#numerosAnteriores');
+                var color;
 	            spanNumeros.empty()
 	            for (var i = 0; i < numeros.length; i++) {
-	                spanNumeros.append("<span>" + numeros[i] + "</span>");
+                    if(numeros[i]== 0){
+                        color = "numeroVerde";
+                    }else if(numeros[i]<8){
+                        color = "numeroRojo";
+                    }else{
+                        color = "numeroNegro";
+                    }
+	                spanNumeros.append('<span class="circulo ' + color + '">' + numeros[i] + '</span>');
 	            }
 	            //spanNumeros.text(salida);
 	        }

@@ -351,4 +351,34 @@ email {
     cursor: pointer;
     overflow: hidden;
     outline: none;
+} 
+
+.apuestasNombre{
+	margin-left: 20px;
+}
+
+.apuestasCantidad{
+   margin-right: 20px;
+   float: right;
+}
+
+.circulo {
+  height: 30px;
+  width: 30px;
+  display: table-cell;
+  text-align: center;
+  font-size:20px;
+  color:white;
+  vertical-align: middle;
+  border-radius: 50%;
+}
+
+.numeroRojo{
+	  background: #FF3636;
+}
+.numeroVerde{
+	  background: #5ECC8B;
+}
+.numeroNegro{
+	  background: black;
 }

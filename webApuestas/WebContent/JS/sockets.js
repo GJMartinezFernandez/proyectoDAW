@@ -34,9 +34,7 @@ function openSocket(){
  
      webSocket.onmessage = function(event){  
             var apuestaNueva = JSON.parse(event.data);
-            var span = $('<span></span><br>');
             var p;
-            var texto = apuestaNueva.nombre + "          " + apuestaNueva.coins;
             switch(apuestaNueva.color){
                 case 'rojo' : p = $('#btnRojo').next();
                               break;
@@ -46,8 +44,7 @@ function openSocket(){
                               break;
             }
          
-        	span.text(texto);
-			p.append(span);
+			p.append('<span class="apuestasNombre">' + apuestaNueva.nombre + '</span><span class="apuestasCantidad">' + apuestaNueva.coins + '</span><br>');
      };
  
      webSocket.onclose = function(event){
