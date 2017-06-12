@@ -39,6 +39,25 @@ public class servidor extends HttpServlet{
 	static int numeroGanador;
 	final int COINS_INICIO = 4000;
 	
+	
+	@GET
+	@Path("/apuestasRealizadas/{json}")
+	public String coinsGratis(@PathParam("json") String json){
+		String salida = "NO OK";
+		Gson gson = new Gson();
+		Properties properties = gson.fromJson(json, Properties.class);
+		try {
+			Connection conexion = getConnection();
+			Statement s = (Statement) conexion.createStatement(); 
+			s.executeUpdate("UPDATE usuarios SET coins = 2000  WHERE id = " + properties.getProperty("id"));
+			salida = "OK";
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		return salida;
+	}
+	
 	@GET
 	@Path("/cronometro")
 	public int getNumero(){
