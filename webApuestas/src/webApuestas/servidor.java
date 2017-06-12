@@ -121,7 +121,7 @@ public class servidor extends HttpServlet{
 		if(ids.size()>0){
 			condicion += ids.get(0).getId();
 			for(int i = 1;i<ids.size();i++){
-				condicion+=","+ids.get(0).getId();;
+				condicion+=","+ids.get(i).getId();;
 			}
 		}
 		
@@ -134,7 +134,7 @@ public class servidor extends HttpServlet{
 			    premio = new Premio(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getInt(4),rs.getString(5));
 			    for(int j=0;j<ids.size();j++){
 			    	if(ids.get(j).getId() == premio.getId()){
-			    		premio.setCantidadComprada(ids.get(j).cantidadComprada);
+			    		premio.setCantidadComprada(ids.get(j).cantidad);
 			    	}
 			    }
 			    premios.add(premio);
