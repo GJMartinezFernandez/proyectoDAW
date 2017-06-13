@@ -20,41 +20,39 @@ $(document).ready(function () {
         boton[i].addEventListener('click', apostar);
     }
     traerApuestas();
-    
 });
 
-
-function traerApuestas(){
-     $.ajax({
-            url: 'services/server/apuestasRealizadas/'
-            , type: 'get'
-            , dataType: "json"
-            , success: function (response) {
-               console.log(response);
-               var p;
-               for(var i = 0;i<response.length;i++){
-                   switch(response[i].color){
-                       case "rojo": p = $('#btnRojo').next();
-                                    break;
-                       case "verde": p = $('#btnVerde').next();
-                                    break;
-                       case "negro": p = $('#btnNegro').next();
-                                    break;
-                   }
-                     p.append('<span class="apuestasNombre">' + response[i].nombre + '</span><span class="apuestasCantidad">' + response[i].coins + '</span><br>');
-               }
-                
-            
+function traerApuestas() {
+    $.ajax({
+        url: 'services/server/apuestasRealizadas/'
+        , type: 'get'
+        , dataType: "json"
+        , success: function (response) {
+            console.log(response);
+            var p;
+            for (var i = 0; i < response.length; i++) {
+                switch (response[i].color) {
+                case "rojo":
+                    p = $('#btnRojo').next();
+                    break;
+                case "verde":
+                    p = $('#btnVerde').next();
+                    break;
+                case "negro":
+                    p = $('#btnNegro').next();
+                    break;
+                }
+                p.append('<span class="apuestasNombre">' + response[i].nombre + '</span><span class="apuestasCantidad">' + response[i].coins + '</span><br>');
             }
-            , error: function () {
-                console.log("error")
-            }
-        });
+        }
+        , error: function () {
+            console.log("error")
+        }
+    });
 }
 
-
 function apostar() {
-    if (comprobarCookie() == 0) {
+    if (comprobarCookie("usuario") == 0) {
         return 0
     }
     var usuario = JSON.parse(getCookie("usuario"))
@@ -152,6 +150,10 @@ function pintar(json, bool) {
             //Animacion completada.
         });
     }
+    var cookie = JSON.parse(getCookie("usuario"))
+    cookie.coins = nuevoBalance
+    cookie = JSON.stringify(cookie)
+    setCookie("usuario", cookie, 1)
 }
 
 function colorApostado(id) {

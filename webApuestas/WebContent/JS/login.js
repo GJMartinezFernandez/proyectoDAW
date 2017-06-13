@@ -6,6 +6,8 @@ $(document).ready(function () {
     var inputId = $('#id');
     var balance = $('#balance');
     var botonCerrar = $('#btnCerrar');
+    var botonCoins = $('#btnCoins');
+    botonCoins.hide();
     botonCerrar.hide();
     //logearse
     $('#formLogin').keypress(function (e) {
@@ -18,6 +20,7 @@ $(document).ready(function () {
             a[x.name] = x.value;
             return a;
         }, {});
+        object.password = SHA256(object.password)
         var data = JSON.stringify(object);
         console.log(data);
         $.ajax({
@@ -38,6 +41,7 @@ $(document).ready(function () {
                     inputName.val(respuesta.name);
                     inputName.val(respuesta.id);
                     botonCerrar.show();
+                    botonCoins.show();
                     console.log("login correcto");
                     setCookie("usuario", response, 1)
                 }
@@ -53,6 +57,7 @@ $(document).ready(function () {
             a[x.name] = x.value;
             return a;
         }, {});
+        object.password = SHA256(object.password)
         var data = JSON.stringify(object);
         console.log(data);
         $.ajax({
@@ -67,6 +72,7 @@ $(document).ready(function () {
                 spanUsuario.text(respuesta.name);
                 balance.text(respuesta.coins);
                 botonCerrar.show();
+                botonCoins.show();
                 inputName.val(respuesta.name);
                 inputName.val(respuesta.id);
                 console.log("Registro correcto");

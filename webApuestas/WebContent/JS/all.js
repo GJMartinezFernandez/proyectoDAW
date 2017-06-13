@@ -19,14 +19,38 @@ $(document).ready(function () {
         $('#usuario').text(cookie.name)
         $('#balance').text(cookie.coins)
         $('#btnCerrar').show()
+        $('#btnCoins').show()
     }
     $('#btnCerrar').click(function () {
         deleteCookie("usuario")
-            //setCookie("usuario", "", 1)
+        deleteCookie("carrito")
         location.reload()
     })
     $('#limpiar').click(function () {
         $("#dineroApuesta").val(0)
+    })
+    $('#btnCoins').click(function () {
+        var cookie = JSON.parse(getCookie("usuario"))
+        var userId = cookie.id
+        var json = {
+            id: userId
+        }
+        var jsonString = JSON.stringify(json)
+        if (cookie.coins == 0) {
+            $.ajax({
+                type: 'GET'
+                , url: 'services/server/apuestasRealizadas/' + jsonString
+                , success: function (data) {
+                    cookie.coins = 2000
+                    setCookie("usuario", JSON.stringify(cookie), 1)
+                    $('#balance').text("2000")
+                    alert("Recibidas 2000 Coins Gratis")
+                }
+            })
+        }
+        else {
+            alert("Solo Puedes realizar esta accion si tu balance es 0")
+        }
     })
 });
 
@@ -65,8 +89,8 @@ function getObjectKeyIndex(obj, keyToFind) {
     return null;
 }
 
-function comprobarCookie() {
-    if (getCookie("usuario") == "") {
+function comprobarCookie(cname) {
+    if (getCookie(cname) == "") {
         return 0
     }
     else {

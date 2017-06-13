@@ -58,10 +58,10 @@ function comprobarStock(stock) {
 function printButtonAddCart(stock, id) {
     var html = ""
     switch (true) {
-    case stock <= 0 || comprobarCookie() == 0:
+    case stock <= 0 || comprobarCookie("usuario") == 0:
         html = ''
         break;
-    case stock > 0 && comprobarCookie() != 0:
+    case stock > 0 && comprobarCookie("usuario") != 0:
         html = '<p class="btn-add" id="' + id + '"><i class="fa fa-shopping-cart"></i><a href="#" class="hidden-sm">Add to cart</a></p>'
         break;
     }
