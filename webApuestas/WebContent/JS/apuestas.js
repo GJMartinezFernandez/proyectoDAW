@@ -57,12 +57,13 @@ function apostar() {
     if (comprobarCookie() == 0) {
         return 0
     }
+    var usuario = JSON.parse(getCookie("usuario"))
     var boton = $(this);
     var p = boton.next();
     var coins = $('#dineroApuesta').val();
     var balance = parseInt($('#balance').text());
     var color = colorApostado($(this).attr("id"));
-    var jug = new Apuesta(1, coins, color);
+    var jug = new Apuesta(usuario.id, coins, color);
     var json = JSON.stringify(jug);
     var nombre = $('#usuario').text();
     //TODO Falta recuperar nombre del jugador
